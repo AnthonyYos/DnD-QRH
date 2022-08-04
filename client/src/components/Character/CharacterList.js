@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { CharacterContext } from '../../context/CharacterContext';
-import CharacterCard from './CharacterCard';
+import CharacterCard from './CharacterCard/CharacterCard';
 import CharacterType from '../../context/CharacterType';
 
 export const CharacterList = ({ characterType }) => {
@@ -12,13 +12,13 @@ export const CharacterList = ({ characterType }) => {
   return (
     <React.Fragment>
       {characterType === CharacterType.ENEMY ? (
-        <div className='row m-3'>
+        <section className='row m-3'>
           {enemies &&
             enemies.length > 0 &&
             enemies.map(character => (
               <CharacterCard key={character._id} character={character} type='enemy' />
             ))}
-        </div>
+        </section>
       ) : (
         <h1>Players</h1>
         // <div className='row m-3'>

@@ -1,19 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { CharacterContext } from '../../context/CharacterContext';
-import CharacterHeader from './CharacterCard/CharacterHeader';
-import CharacterStats from './CharacterCard/CharacterStats';
-import Button from '../UI/Button';
+import React, { useContext } from 'react';
+import { CharacterContext } from '../../../context/CharacterContext';
+import CharacterHeader from './CharacterHeader';
+import CharacterStats from './CharacterStats';
+import Button from '../../UI/Button';
 
 export default function CharacterCard({ character, type }) {
   const { getEnemy, deleteEnemy } = useContext(CharacterContext);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await axios.get(`api/v1/enemies/${enemyID}`);
-  //     setEnemyState(res.data.data);
-  //   };
-  //   fetchData();
-  // }, []);
 
   const deleteHandler = () => {
     if (type === 'enemy') return deleteEnemy(character._id);
@@ -23,7 +15,7 @@ export default function CharacterCard({ character, type }) {
   };
 
   return (
-    <section className='col-sm-4 mb-4'>
+    <div className='col-sm-4 mb-4'>
       <div className='card'>
         <div className='card-body'>
           <CharacterHeader
@@ -35,18 +27,20 @@ export default function CharacterCard({ character, type }) {
             race={character.race}
           />
           <CharacterStats stats={character.stats} />
-          <div className='row'>
-            <Button className='btn btn-info col-lg-3 offset-lg-2 col-md-5' onClick={getHandler}>
+          <section className='row'>
+            <Button
+              className='btn btn-info col-lg-3 offset-lg-2 col-md-5 col-4 offset-1'
+              onClick={getHandler}>
               Update
             </Button>
             <Button
-              className='btn btn-danger col-lg-3 offset-lg-2 col-md-5 offset-md-2'
+              className='btn btn-danger col-lg-3 offset-lg-2 col-md-5 offset-md-2 col-4 offset-2'
               onClick={deleteHandler}>
               Delete
             </Button>
-          </div>
+          </section>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

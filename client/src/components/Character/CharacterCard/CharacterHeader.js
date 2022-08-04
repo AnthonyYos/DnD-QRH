@@ -3,8 +3,8 @@ import React from 'react';
 export default function CharacterHeader({ name, health, armorClass, alignment, race }) {
   return (
     <React.Fragment>
-      <h5 className='card-title text-center'>{name}</h5>
       <section className='row card-text'>
+        <h5 className='card-title text-center'>{name}</h5>
         <div className='col-md-6'>
           <strong>Health: </strong>
           {health}

@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function CharacterStats({ stats }) {
   return (
-    <div className='row'>
-      <p className='col-md-6 col-6 offset-md-0 offset-1 '>
+    <section className='row'>
+      <p className='col-md-6 offset-md-0 col-6 '>
         <strong>Str: </strong>
         {stats.str}
         <br />
@@ -25,6 +25,6 @@ export default function CharacterStats({ stats }) {
         {stats.cha}
         <br />
       </p>
-    </div>
+    </section>
   );
 }

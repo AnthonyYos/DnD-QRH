@@ -1,34 +1,30 @@
-import React, { useContext, useEffect } from 'react';
-import { CharacterContext } from '../../context/CharacterContext';
+import React, { useEffect, useState } from 'react';
 import CharacterCard from './CharacterCard/CharacterCard';
-import CharacterType from '../../context/CharacterType';
+import axios from 'axios';
 
 export const CharacterList = ({ characterType }) => {
-  const { enemies, getCharacters } = useContext(CharacterContext);
+  const [characters, setCharacters] = useState();
+
   useEffect(() => {
-    getCharacters(characterType);
+    const fetchData = async () => {
+      const res = await axios.get(`/api/v1/${characterType}`);
+      setCharacters(res.data.data);
+    };
+    fetchData();
   }, []);
 
   return (
-    <React.Fragment>
-      {characterType === CharacterType.ENEMY ? (
-        <section className='row m-3'>
-          {enemies &&
-            enemies.length > 0 &&
-            enemies.map(character => (
-              <CharacterCard key={character._id} character={character} type='enemy' />
-            ))}
-        </section>
-      ) : (
-        <h1>Players</h1>
-        // <div className='row m-3'>
-        //   {enemies &&
-        //     enemies.length > 0 &&
-        //     enemies.map(character => (
-        //       <Character key={character._id} character={character} type='enemy' />
-        //     ))}
-        // </div>
-      )}
-    </React.Fragment>
+    <section className='row m-3'>
+      {characters &&
+        characters.length > 0 &&
+        characters.map(character => (
+          <CharacterCard
+            key={character._id}
+            character={character}
+            characterType={characterType}
+            charactersState={{ setCharacters, characters }}
+          />
+        ))}
+    </section>
   );
 };

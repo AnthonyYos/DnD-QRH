@@ -3,7 +3,7 @@ import React from 'react';
 export default function CharacterStats({ stats }) {
   return (
     <div className='row'>
-      <p className='col-md-6'>
+      <p className='col-md-6 col-6 offset-md-0 offset-1 '>
         <strong>Str: </strong>
         {stats.str}
         <br />
@@ -14,7 +14,7 @@ export default function CharacterStats({ stats }) {
         {stats.con}
         <br />
       </p>
-      <p className='col-md-6'>
+      <p className='col-md-6 col-5'>
         <strong>Int: </strong>
         {stats.int}
         <br />

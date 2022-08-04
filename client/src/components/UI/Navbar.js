@@ -23,7 +23,7 @@ export default function Navbar() {
             <Link className='nav-link' to='/enemies'>
               Enemies
             </Link>
-            <Link className='nav-link' to='/create'>
+            <Link className='nav-link' to='/create/enemies' type='enemy'>
               Add Enemy
             </Link>
           </div>

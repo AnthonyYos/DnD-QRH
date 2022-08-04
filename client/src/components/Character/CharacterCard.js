@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { EnemyContext } from '../../context/EnemyContext';
+import { CharacterContext } from '../../context/CharacterContext';
 import CharacterHeader from './CharacterCard/CharacterHeader';
 import CharacterStats from './CharacterCard/CharacterStats';
 import Button from '../UI/Button';
 
 export default function CharacterCard({ character, type }) {
-  const { getEnemy, deleteEnemy } = useContext(EnemyContext);
+  const { getEnemy, deleteEnemy } = useContext(CharacterContext);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -36,10 +36,12 @@ export default function CharacterCard({ character, type }) {
           />
           <CharacterStats stats={character.stats} />
           <div className='row'>
-            <Button className='btn btn-info col-lg-3 offset-lg-2' onClick={getHandler}>
+            <Button className='btn btn-info col-lg-3 offset-lg-2 col-md-5' onClick={getHandler}>
               Update
             </Button>
-            <Button className='btn btn-danger col-lg-3 offset-lg-2' onClick={deleteHandler}>
+            <Button
+              className='btn btn-danger col-lg-3 offset-lg-2 col-md-5 offset-md-2'
+              onClick={deleteHandler}>
               Delete
             </Button>
           </div>

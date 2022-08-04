@@ -1,21 +1,17 @@
 import React, { useContext, useEffect } from 'react';
-import { EnemyContext } from '../../context/EnemyContext';
+import { CharacterContext } from '../../context/CharacterContext';
 import CharacterCard from './CharacterCard';
+import CharacterType from '../../context/CharacterType';
 
-export const CharacterList = props => {
-  const { enemies, getEnemies } = useContext(EnemyContext);
+export const CharacterList = ({ characterType }) => {
+  const { enemies, getCharacters } = useContext(CharacterContext);
   useEffect(() => {
-    if (props.type === 'enemies') {
-      getEnemies();
-      console.log('characterlist useeffect enemies');
-    }
-    // if (props.type === 'heroes') {
-    //   getHeroes();
-    // }
+    getCharacters(characterType);
   }, []);
+
   return (
     <React.Fragment>
-      {props.type === 'enemies' ? (
+      {characterType === CharacterType.ENEMY ? (
         <div className='row m-3'>
           {enemies &&
             enemies.length > 0 &&
@@ -24,7 +20,7 @@ export const CharacterList = props => {
             ))}
         </div>
       ) : (
-        <h1>heroes</h1>
+        <h1>Players</h1>
         // <div className='row m-3'>
         //   {enemies &&
         //     enemies.length > 0 &&

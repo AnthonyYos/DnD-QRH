@@ -1,22 +1,30 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { EnemyProvider } from './context/EnemyContext';
+import { CharacterProvider } from './context/CharacterContext';
 import { CharacterList } from './components/Character/CharacterList';
 import AddCharacter from './components/Character/AddCharacter';
 import Navbar from './components/UI/Navbar';
+import CharacterType from './context/CharacterType';
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <EnemyProvider>
+      <CharacterProvider>
         <Routes>
           <Route path='/' element={<h1>Homepage</h1>} />
-          <Route path='/create' element={<AddCharacter />} />
-          <Route path='/enemies' element={<CharacterList type='enemies' />} />
-          <Route path='/heroes' element={<CharacterList type='heroes' />} />
+          <Route
+            path='/create/enemies'
+            element={<AddCharacter characterType={CharacterType.ENEMY} />}
+          />
+          <Route
+            path='/create/players'
+            element={<AddCharacter characterType={CharacterType.PLAYER} />}
+          />
+          <Route path='/enemies' element={<CharacterList characterType={CharacterType.ENEMY} />} />
+          <Route path='/players' element={<CharacterList characterType={CharacterType.PLAYER} />} />
         </Routes>
-      </EnemyProvider>
+      </CharacterProvider>
     </BrowserRouter>
   );
 }

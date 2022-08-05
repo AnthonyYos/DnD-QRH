@@ -5,11 +5,12 @@ import CharacterStats from './CharacterStats';
 import Button from '../../UI/Button';
 import { Link } from 'react-router-dom';
 
-export default function CharacterCard({ character, characterType, charactersState }) {
+export default function CharacterCard({ character, resourceType, characterListState }) {
   const { deleteEnemy } = useContext(CharacterContext);
 
   const deleteHandler = () => {
-    charactersState.setCharacters(charactersState.characters.filter(c => c._id !== character._id));
+    const newList = characterListState.characters.filter(c => c._id !== character._id);
+    characterListState.setCharacters(newList);
     return deleteEnemy(character._id);
   };
 
@@ -28,12 +29,12 @@ export default function CharacterCard({ character, characterType, charactersStat
           <CharacterStats stats={character.stats} />
           <section className='row'>
             <Link
-              className='btn btn-info col-lg-3 offset-lg-2 col-md-5 col-4 offset-1'
-              to={`/${characterType}/${character._id}`}>
+              className='btn btn-info col-lg-3 offset-lg-2 col-5'
+              to={`/${resourceType}/${character._id}`}>
               Update
             </Link>
             <Button
-              className='btn btn-danger col-lg-3 offset-lg-2 col-md-5 offset-md-2 col-4 offset-2'
+              className='btn btn-danger col-lg-3 offset-lg-2 col-5 offset-2'
               onClick={deleteHandler}>
               Delete
             </Button>

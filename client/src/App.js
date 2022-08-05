@@ -4,7 +4,8 @@ import { CharacterProvider } from './context/CharacterContext';
 import { CharacterList } from './components/Character/CharacterList';
 import AddCharacter from './components/Character/AddCharacter';
 import Navbar from './components/UI/Navbar';
-import CharacterType from './context/CharacterType';
+import ApiEndPoint from './context/ResourceType';
+import CharacterDetails from './components/Character/CharacterDetails';
 
 function App() {
   return (
@@ -15,14 +16,22 @@ function App() {
           <Route path='/' element={<h1>Homepage</h1>} />
           <Route
             path='/create/enemies'
-            element={<AddCharacter characterType={CharacterType.ENEMY} />}
+            element={<AddCharacter resourceType={ApiEndPoint.ENEMY} />}
+          />
+          <Route path='/enemies' element={<CharacterList resourceType={ApiEndPoint.ENEMY} />} />
+          <Route
+            path='/enemies/:id'
+            element={<CharacterDetails resourceType={ApiEndPoint.ENEMY} />}
           />
           <Route
             path='/create/players'
-            element={<AddCharacter characterType={CharacterType.PLAYER} />}
+            element={<AddCharacter resourceType={ApiEndPoint.PLAYER} />}
           />
-          <Route path='/enemies' element={<CharacterList characterType={CharacterType.ENEMY} />} />
-          <Route path='/players' element={<CharacterList characterType={CharacterType.PLAYER} />} />
+          <Route path='/players' element={<CharacterList resourceType={ApiEndPoint.PLAYER} />} />
+          <Route
+            path='/players/:id'
+            element={<CharacterDetails resourceType={ApiEndPoint.PLAYER} />}
+          />
         </Routes>
       </CharacterProvider>
     </BrowserRouter>

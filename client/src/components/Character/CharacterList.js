@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import CharacterCard from './CharacterCard/CharacterCard';
 import axios from 'axios';
 
-export const CharacterList = ({ characterType }) => {
+export const CharacterList = ({ resourceType }) => {
   const [characters, setCharacters] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`/api/v1/${characterType}`);
+      const res = await axios.get(`/api/v1/${resourceType}`);
       setCharacters(res.data.data);
     };
     fetchData();
@@ -21,8 +21,8 @@ export const CharacterList = ({ characterType }) => {
           <CharacterCard
             key={character._id}
             character={character}
-            characterType={characterType}
-            charactersState={{ setCharacters, characters }}
+            resourceType={resourceType}
+            characterListState={{ setCharacters, characters }}
           />
         ))}
     </section>

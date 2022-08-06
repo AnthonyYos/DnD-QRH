@@ -1,4 +1,4 @@
-const Player = require('../models/player');
+const Player = require('../models/character');
 
 //@desc Get all player
 //@route GET /api/v1/player
@@ -6,7 +6,7 @@ const Player = require('../models/player');
 const getPlayers = async (req, res, next) => {
   try {
     // const players = await Player.find({}, '_id');
-    const players = await Player.find();
+    const players = await Player.find({ type: 'player' });
     return res.status(200).json({ success: true, data: players });
   } catch (error) {
     return res.status(500).json({ success: false, error: 'Server error' });

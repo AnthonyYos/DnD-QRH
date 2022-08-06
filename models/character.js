@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const enemySchema = new mongoose.Schema({
+const characterSchema = new mongoose.Schema({
+  type: { type: String, required: true },
   name: {
     type: String,
     required: true,
@@ -53,4 +54,4 @@ const enemySchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Enemy', enemySchema);
+module.exports = mongoose.model('Character', characterSchema);

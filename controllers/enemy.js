@@ -1,4 +1,4 @@
-const Enemy = require('../models/enemy');
+const Enemy = require('../models/character');
 
 //@desc Get all enemies
 //@route GET /api/v1/enemies
@@ -6,7 +6,7 @@ const Enemy = require('../models/enemy');
 const getEnemies = async (req, res, next) => {
   try {
     // const enemies = await Enemy.find({}, '_id');
-    const enemies = await Enemy.find();
+    const enemies = await Enemy.find({ type: 'enemy' });
     return res.status(200).json({ success: true, data: enemies });
   } catch (error) {
     return res.status(500).json({ success: false, error: 'Server error' });

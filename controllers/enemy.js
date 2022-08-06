@@ -13,6 +13,9 @@ const getEnemies = async (req, res, next) => {
   }
 };
 
+//@desc Get enemy by id
+//@route GET /api/v1/enemy
+//@access Public
 const findEnemy = async (req, res, next) => {
   try {
     const enemy = await Enemy.findById(req.params.id);
@@ -22,6 +25,9 @@ const findEnemy = async (req, res, next) => {
   }
 };
 
+//@desc Post player
+//@route post /api/v1/player
+//@access Public
 const addEnemy = async (req, res, next) => {
   try {
     const newEnemy = await Enemy.create(req.body);
@@ -31,6 +37,9 @@ const addEnemy = async (req, res, next) => {
   }
 };
 
+//@desc Put find/update player by id
+//@route Put /api/v1/player/:id
+//@access Public
 const updateEnemy = async (req, res, next) => {
   try {
     const enemy = await Enemy.findByIdAndUpdate(req.params.id, req.body);
@@ -41,6 +50,9 @@ const updateEnemy = async (req, res, next) => {
   }
 };
 
+//@desc Delete find/delete player by id
+//@route delete /api/v1/player/:id
+//@access Public
 const deleteEnemy = async (req, res, next) => {
   try {
     const enemy = await Enemy.findByIdAndDelete(req.params.id);

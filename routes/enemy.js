@@ -10,7 +10,7 @@ router
 router
   .route('/:id')
   .get(wrapAsync(enemyController.findEnemy))
-  .post(wrapAsync(enemyController.updateEnemy))
+  .put(wrapAsync(enemyController.updateEnemy))
   .delete(wrapAsync(enemyController.deleteEnemy));
 
 module.exports = router;

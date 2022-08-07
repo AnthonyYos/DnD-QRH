@@ -1,30 +1,25 @@
 import React from 'react';
+import Stat from './Stat';
 
-export default function CharacterStats({ stats }) {
+export default function CharacterStats({ stats, className }) {
   return (
-    <section className='row'>
-      <p className='col-md-6 offset-md-0 col-6 '>
-        <strong>Str: </strong>
-        {stats.str}
+    <React.Fragment>
+      <p className={className}>
+        <Stat label='Str' statValue={stats.str} modifier={'placeholder'} />
         <br />
-        <strong>Dex: </strong>
-        {stats.dex}
+        <Stat label='Dex' statValue={stats.dex} modifier={'placeholder'} />
         <br />
-        <strong>Con: </strong>
-        {stats.con}
+        <Stat label='Con' statValue={stats.con} modifier={'placeholder'} />
         <br />
       </p>
-      <p className='col-md-6 col-5'>
-        <strong>Int: </strong>
-        {stats.int}
+      <p className={className}>
+        <Stat label='Int' statValue={stats.int} modifier={'placeholder'} />
         <br />
-        <strong>Wis: </strong>
-        {stats.wis}
+        <Stat label='Wis' statValue={stats.wis} modifier={'placeholder'} />
         <br />
-        <strong>Cha: </strong>
-        {stats.cha}
+        <Stat label='Cha' statValue={stats.cha} modifier={'placeholder'} />
         <br />
       </p>
-    </section>
+    </React.Fragment>
   );
 }

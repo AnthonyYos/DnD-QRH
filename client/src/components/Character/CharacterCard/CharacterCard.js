@@ -18,15 +18,19 @@ export default function CharacterCard({ character, resourceType, characterListSt
     <div className='col-sm-4 mb-4'>
       <div className='card'>
         <div className='card-body'>
-          <CharacterHeader
-            name={character.name}
-            health={character.health}
-            armorClass={character.armorClass}
-            speed={character.speed}
-            alignment={character.alignment}
-            race={character.race}
-          />
-          <CharacterStats stats={character.stats} />
+          <section className='row card-text'>
+            <CharacterHeader
+              name={character.name}
+              health={character.health}
+              armorClass={character.armorClass}
+              speed={character.speed}
+              alignment={character.alignment}
+              race={character.race}
+            />
+          </section>
+          <section className='row'>
+            <CharacterStats stats={character.stats} className='col-md-6 col-6' />
+          </section>
           <section className='row'>
             <Link
               className='btn btn-info col-lg-3 offset-lg-2 col-5'

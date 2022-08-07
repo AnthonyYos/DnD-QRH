@@ -1,17 +1,16 @@
-import React, { useContext } from 'react';
-import { CharacterContext } from '../../../context/CharacterContext';
+import React from 'react';
+
 import CharacterHeader from './CharacterHeader';
 import CharacterStats from './CharacterStats';
 import Button from '../../UI/Button';
 import { Link } from 'react-router-dom';
+import { deleteCharacter } from '../../../util/functions/delete';
 
 export default function CharacterCard({ character, resourceType, characterListState }) {
-  const { deleteEnemy } = useContext(CharacterContext);
-
   const deleteHandler = () => {
     const newList = characterListState.characters.filter(c => c._id !== character._id);
     characterListState.setCharacters(newList);
-    return deleteEnemy(character._id);
+    return deleteCharacter(character._id, resourceType);
   };
 
   return (

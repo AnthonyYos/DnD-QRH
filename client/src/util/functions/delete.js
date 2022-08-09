@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function deleteCharacter(id, resourceType) {
+export async function deleteResource(id, resourceType) {
   try {
     await axios.delete(`/api/v1/${resourceType}/${id}`);
   } catch (err) {

@@ -4,13 +4,13 @@ import CharacterHeader from './CharacterHeader';
 import CharacterStats from './CharacterStats';
 import Button from '../../UI/Button';
 import { Link } from 'react-router-dom';
-import { deleteCharacter } from '../../../util/functions/delete';
+import { deleteResource } from '../../../util/functions/delete';
 
 export default function CharacterCard({ character, resourceType, characterListState }) {
   const deleteHandler = () => {
     const newList = characterListState.characters.filter(c => c._id !== character._id);
     characterListState.setCharacters(newList);
-    return deleteCharacter(character._id, resourceType);
+    return deleteResource(character._id, resourceType);
   };
 
   return (

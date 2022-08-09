@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function add(character, characterType) {
+export async function add(data, resourceType) {
   const config = {
     headers: {
       'Content-type': 'application/json',
@@ -8,7 +8,7 @@ export async function add(character, characterType) {
   };
 
   try {
-    await axios.post(`/api/v1/${characterType}`, character, config);
+    await axios.post(`/api/v1/${resourceType}`, data, config);
   } catch (err) {
     console.log(err);
   }

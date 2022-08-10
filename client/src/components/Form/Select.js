@@ -6,9 +6,9 @@ export default function Select({ register, name, label, options, className, ...r
       <div className={className}>
         <label htmlFor={name}>{label}&ensp;</label>
         <select {...register(name)} {...rest}>
-          {options.map(value => (
-            <option key={value} value={value}>
-              {value}
+          {options.map(option => (
+            <option key={option} value={option}>
+              {option}
             </option>
           ))}
         </select>
@@ -16,5 +16,3 @@ export default function Select({ register, name, label, options, className, ...r
     </React.Fragment>
   );
 }
-
-<option value='Lawful Good'>Lawful Good</option>;

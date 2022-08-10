@@ -8,15 +8,6 @@ export default function Navbar() {
         <Link className='navbar-brand' to='/'>
           Home
         </Link>
-        <div className='navbar-nav'>
-          <Link className='nav-link' to='/create/players'>
-            Add Player
-          </Link>
-          <Link className='nav-link' to='/create/enemies'>
-            Add Enemy
-          </Link>
-        </div>
-
         <button
           className='navbar-toggler'
           type='button'
@@ -29,8 +20,14 @@ export default function Navbar() {
         </button>
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
           <div className='navbar-nav ms-auto'>
+            <Link className='nav-link' to='/create/players'>
+              Add Player
+            </Link>
             <Link className='nav-link' to='/players'>
               Players
+            </Link>
+            <Link className='nav-link' to='/create/enemies'>
+              Add Enemy
             </Link>
             <Link className='nav-link' to='/enemies'>
               Enemies

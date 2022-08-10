@@ -7,6 +7,7 @@ import Input from '../Form/Input';
 import Select from '../Form/Select';
 import Button from '../UI/Button';
 import { alignmentOptions } from '../../util/alignmentOptions';
+import StatInput from '../Form/StatInput';
 
 export default function AddCharacter({ resourceType }) {
   const navigate = useNavigate();
@@ -14,25 +15,43 @@ export default function AddCharacter({ resourceType }) {
   const btnLabel = resourceType === ApiEndpoint.PLAYER ? 'Add Player' : 'Add Enemy';
   const characterType = resourceType === ApiEndpoint.PLAYER ? 'player' : 'enemy';
 
-  const onSubmit = e => {
+  const onSubmit = formData => {
     const newCharacter = {
-      ...e,
       type: characterType,
-      speed: 50,
-      stats: { str: 5, dex: 5, con: 5, int: 5, wis: 5, cha: 5 },
-      armorClass: 20,
+      name: formData.name,
+      race: formData.race,
+      armorClass: formData.armorClass,
+      health: formData.health,
+      speed: formData.speed,
+      alignment: formData.alignment,
+      stats: {
+        str: formData.str,
+        dex: formData.dex,
+        con: formData.con,
+        int: formData.int,
+        wis: formData.wis,
+        cha: formData.cha,
+      },
+      modifiers: {
+        str: formData.str_mod,
+        dex: formData.dex_mod,
+        con: formData.con_mod,
+        int: formData.int_mod,
+        wis: formData.wis_mod,
+        cha: formData.cha_mod,
+      },
     };
     try {
       console.log(newCharacter);
-      // add(newCharacter, resourceType);
-      // switch (resourceType) {
-      //   case ApiEndpoint.PLAYER:
-      //     return navigate('/players');
-      //   case ApiEndpoint.ENEMY:
-      //     return navigate('/enemies');
-      //   default:
-      //     return navigate('/');
-      // }
+      add(newCharacter, resourceType);
+      switch (resourceType) {
+        case ApiEndpoint.PLAYER:
+          return navigate('/players');
+        case ApiEndpoint.ENEMY:
+          return navigate('/enemies');
+        default:
+          return navigate('/');
+      }
     } catch (error) {
       console.log(error, 'errrororor');
     }
@@ -43,16 +62,25 @@ export default function AddCharacter({ resourceType }) {
       <section className='row'>
         <div className='col-sm-4 offset-sm-4 card'>
           <Form onSubmit={onSubmit}>
-            <Input name='name' label='Name' className='form-group col-5 offset-4' />
-            <Input name='race' label='Race' />
+            <Input name='name' label='Name' className='col-4 offset-4' />
+            <Input name='race' label='Race' className='col-4 m-3' />
+            <Input name='armorClass' label='Armor Class' type='number' min={1} max={500} />
             <Input name='health' label='Health' type='number' min={1} max={500} />
+            <Input name='speed' label='Speed' type='number' min={1} max={120} />
             <Select
               name='alignment'
               label='Alignment'
               className='form-group col-5 offset-4'
               options={alignmentOptions}
             />
-            <Button className='btn btn-success offset-5 col-2' type='submit'>
+            <StatInput name='str' label='Str' type='number' className='row m-3' min={1} max={20} />
+            <StatInput name='dex' label='Dex' type='number' className='row m-3' min={1} max={20} />
+            <StatInput name='con' label='Con' type='number' className='row m-3' min={1} max={20} />
+            <StatInput name='int' label='Int' type='number' className='row m-3' min={1} max={20} />
+            <StatInput name='wis' label='Wis' type='number' className='row m-3' min={1} max={20} />
+            <StatInput name='cha' label='Cha' type='number' className='row m-3' min={1} max={20} />
+            {/* <StatsInput type='number' stats={['str']} /> */}
+            <Button className='btn btn-success offset-4 col-4' type='submit'>
               {btnLabel}
             </Button>
           </Form>

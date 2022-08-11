@@ -5,7 +5,7 @@ const Enemy = require('../models/character');
 //@access Public
 const getEnemies = async (req, res, next) => {
   // const enemies = await Enemy.find({}, '_id');
-  const enemies = await Enemy.find({ type: 'enemy' });
+  const enemies = await Enemy.find({ type: 'enemy' }).sort({ name: 'asc' });
   return res.status(200).json({ success: true, data: enemies });
 };
 

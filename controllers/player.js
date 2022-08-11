@@ -5,7 +5,7 @@ const Player = require('../models/character');
 //@access Public
 const getPlayers = async (req, res, next) => {
   // const players = await Player.find({}, '_id');
-  const players = await Player.find({ type: 'player' });
+  const players = await Player.find({ type: 'player' }).sort({ name: 'asc' });
   return res.status(200).json({ success: true, data: players });
 };
 

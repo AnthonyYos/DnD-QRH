@@ -2,9 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function Form({ formData, children, onSubmit }) {
-  const { stats, ...data } = formData; // eventually destructure out modifiers object and spread it into defaultValues
-  const defaultValues = { ...data, ...stats, cha_mod: 5 };
-  console.log(defaultValues);
+  const { stats, modifiers, ...data } = formData || {};
+  const defaultValues = { ...stats, ...modifiers, ...data };
   const {
     register,
     handleSubmit,

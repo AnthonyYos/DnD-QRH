@@ -33,12 +33,12 @@ export default function AddCharacter({ resourceType }) {
         cha: formData.cha,
       },
       modifiers: {
-        str: formData.str_mod,
-        dex: formData.dex_mod,
-        con: formData.con_mod,
-        int: formData.int_mod,
-        wis: formData.wis_mod,
-        cha: formData.cha_mod,
+        str_mod: formData.str_mod,
+        dex_mod: formData.dex_mod,
+        con_mod: formData.con_mod,
+        int_mod: formData.int_mod,
+        wis_mod: formData.wis_mod,
+        cha_mod: formData.cha_mod,
       },
     };
     try {

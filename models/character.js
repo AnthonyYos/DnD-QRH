@@ -52,6 +52,32 @@ const characterSchema = new mongoose.Schema({
       required: true,
     },
   },
+  modifiers: {
+    str_mod: {
+      type: Number,
+      required: true,
+    },
+    dex_mod: {
+      type: Number,
+      required: true,
+    },
+    con_mod: {
+      type: Number,
+      required: true,
+    },
+    int_mod: {
+      type: Number,
+      required: true,
+    },
+    wis_mod: {
+      type: Number,
+      required: true,
+    },
+    cha_mod: {
+      type: Number,
+      required: true,
+    },
+  },
 });
 
 module.exports = mongoose.model('Character', characterSchema);

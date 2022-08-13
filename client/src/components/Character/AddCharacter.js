@@ -73,12 +73,48 @@ export default function AddCharacter({ resourceType }) {
               className='form-group col-5 offset-4'
               options={alignmentOptions}
             />
-            <StatInput name='str' label='Str' type='number' className='row m-3' min={1} max={20} />
-            <StatInput name='dex' label='Dex' type='number' className='row m-3' min={1} max={20} />
-            <StatInput name='con' label='Con' type='number' className='row m-3' min={1} max={20} />
-            <StatInput name='int' label='Int' type='number' className='row m-3' min={1} max={20} />
-            <StatInput name='wis' label='Wis' type='number' className='row m-3' min={1} max={20} />
-            <StatInput name='cha' label='Cha' type='number' className='row m-3' min={1} max={20} />
+            <StatInput
+              name='str'
+              label='Str'
+              type='number'
+              className='row m-3'
+              characterType={characterType}
+            />
+            <StatInput
+              name='dex'
+              label='Dex'
+              type='number'
+              className='row m-3'
+              characterType={characterType}
+            />
+            <StatInput
+              name='con'
+              label='Con'
+              type='number'
+              className='row m-3'
+              characterType={characterType}
+            />
+            <StatInput
+              name='int'
+              label='Int'
+              type='number'
+              className='row m-3'
+              characterType={characterType}
+            />
+            <StatInput
+              name='wis'
+              label='Wis'
+              type='number'
+              className='row m-3'
+              characterType={characterType}
+            />
+            <StatInput
+              name='cha'
+              label='Cha'
+              type='number'
+              className='row m-3'
+              characterType={characterType}
+            />
             {/* <StatsInput type='number' stats={['str']} /> */}
             <Button className='btn btn-success offset-4 col-4' type='submit'>
               {btnLabel}

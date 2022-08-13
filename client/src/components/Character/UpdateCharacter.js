@@ -22,6 +22,7 @@ export default function UpdateCharacter({ resourceType }) {
   const [updated, setUpdated] = useState();
 
   const btnLabel = resourceType === ApiEndpoint.PLAYER ? 'Update Player' : 'Update Enemy';
+  const characterType = resourceType === ApiEndpoint.PLAYER ? 'player' : 'enemy';
 
   const onSubmit = e => {
     const { str, dex, con, int, wis, cha, ...partialData } = e;
@@ -72,55 +73,49 @@ export default function UpdateCharacter({ resourceType }) {
                 label='Str'
                 type='number'
                 className='row m-3'
-                min={3}
-                max={20}
+                characterType={characterType}
               />
               <StatInput
                 name='dex'
                 label='Dex'
                 type='number'
                 className='row m-3'
-                min={3}
-                max={20}
+                characterType={characterType}
               />
               <StatInput
                 name='con'
                 label='Con'
                 type='number'
                 className='row m-3'
-                min={3}
-                max={20}
+                characterType={characterType}
               />
               <StatInput
                 name='int'
                 label='Int'
                 type='number'
                 className='row m-3'
-                min={3}
-                max={20}
+                characterType={characterType}
               />
               <StatInput
                 name='wis'
                 label='Wis'
                 type='number'
                 className='row m-3'
-                min={3}
-                max={20}
+                characterType={characterType}
               />
               <StatInput
                 name='cha'
                 label='Cha'
                 type='number'
                 className='row m-3'
-                min={3}
-                max={20}
+                characterType={characterType}
               />
-              <Button className='btn btn-success offset-4 col-4 my-2' type='submit'>
+              <Button className='btn btn-success offset-4 col-4 my-4' type='submit'>
                 {btnLabel}
               </Button>
-              {updated && <h5 className='text-center m-4'>Updated {character.name}</h5>}
             </Form>
           </div>
+          {updated && <h5 className='text-center m-4'>Updated {character.name}</h5>}
         </section>
       )}
     </React.Fragment>

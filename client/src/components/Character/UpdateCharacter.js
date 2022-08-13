@@ -10,7 +10,7 @@ import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
 import { update } from '../../util/functions/update';
 
-export default function CharacterDetails({ resourceType }) {
+export default function UpdateCharacter({ resourceType }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const {
@@ -38,10 +38,8 @@ export default function CharacterDetails({ resourceType }) {
       setUpdated(true);
       switch (resourceType) {
         case ApiEndpoint.PLAYER:
-          console.log('should be goign to player');
           return navigate(`/players/${id}`);
         case ApiEndpoint.ENEMY:
-          console.log('should be goign to enemy');
           return navigate(`/enemies/${id}`);
         default:
           setUpdated(false);
@@ -54,7 +52,6 @@ export default function CharacterDetails({ resourceType }) {
 
   return (
     <React.Fragment>
-      {updated && <h5 className='text-center m-4'>Updated {character.name}</h5>}
       {character && (
         <section className='row'>
           <div className='col-sm-4 offset-sm-4 card'>
@@ -118,9 +115,10 @@ export default function CharacterDetails({ resourceType }) {
                 min={3}
                 max={20}
               />
-              <Button className='btn btn-success offset-4 col-4 my-4' type='submit'>
+              <Button className='btn btn-success offset-4 col-4 my-2' type='submit'>
                 {btnLabel}
               </Button>
+              {updated && <h5 className='text-center m-4'>Updated {character.name}</h5>}
             </Form>
           </div>
         </section>

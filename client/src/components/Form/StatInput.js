@@ -15,6 +15,7 @@ export default function StatInput({ register, name, label, className, ...rest })
           register={register}
           className={inputClassName}
           {...rest}
+          min={-5}
         />
       </div>
     </React.Fragment>

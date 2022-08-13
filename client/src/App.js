@@ -4,7 +4,7 @@ import { CharacterList } from './components/Character/CharacterList';
 import AddCharacter from './components/Character/AddCharacter';
 import Navbar from './components/UI/Navbar';
 import ApiEndPoint from './context/ResourceType';
-import CharacterDetails from './components/Character/CharacterDetails';
+import UpdateCharacter from './components/Character/UpdateCharacter';
 
 function App() {
   return (
@@ -14,10 +14,7 @@ function App() {
         <Route path='/' element={<h1>Homepage</h1>} />
         <Route path='/create/enemies' element={<AddCharacter resourceType={ApiEndPoint.ENEMY} />} />
         <Route path='/enemies' element={<CharacterList resourceType={ApiEndPoint.ENEMY} />} />
-        <Route
-          path='/enemies/:id'
-          element={<CharacterDetails resourceType={ApiEndPoint.ENEMY} />}
-        />
+        <Route path='/enemies/:id' element={<UpdateCharacter resourceType={ApiEndPoint.ENEMY} />} />
         <Route
           path='/create/players'
           element={<AddCharacter resourceType={ApiEndPoint.PLAYER} />}
@@ -25,7 +22,7 @@ function App() {
         <Route path='/players' element={<CharacterList resourceType={ApiEndPoint.PLAYER} />} />
         <Route
           path='/players/:id'
-          element={<CharacterDetails resourceType={ApiEndPoint.PLAYER} />}
+          element={<UpdateCharacter resourceType={ApiEndPoint.PLAYER} />}
         />
       </Routes>
     </BrowserRouter>

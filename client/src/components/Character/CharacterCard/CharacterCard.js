@@ -27,10 +27,14 @@ export default function CharacterCard({ character, resourceType, characterListSt
               race={character.race}
             />
           </section>
-          <section className='row'>
-            <CharacterStats stats={character.stats} className='col-md-6 col-6' />
+          <section className='row mb-2'>
+            <CharacterStats
+              stats={character.stats}
+              modifiers={character.modifiers}
+              className='col-md-6 col-6'
+            />
           </section>
-          <section className='row'>
+          <section className='row mx-2'>
             <Link
               className='btn btn-info col-lg-3 offset-lg-2 col-5'
               to={`/${resourceType}/${character._id}`}>

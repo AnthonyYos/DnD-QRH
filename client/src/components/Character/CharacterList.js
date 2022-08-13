@@ -1,6 +1,8 @@
 import React from 'react';
 import CharacterCard from './CharacterCard/CharacterCard';
 import useFetch from '../../hooks/useFetch';
+import ApiEndpoint from '../../context/ResourceType';
+import { Link } from 'react-router-dom';
 
 export const CharacterList = ({ resourceType }) => {
   const {
@@ -10,9 +12,12 @@ export const CharacterList = ({ resourceType }) => {
     setData: setCharacters,
   } = useFetch(`/api/v1/${resourceType}`);
 
+  const addCharacterLabel = resourceType === ApiEndpoint.PLAYER ? 'Add Player' : 'Add Enemy';
+
   return (
     <section className='row m-3'>
       {characters &&
+        characters.length > 0 &&
         characters.map(character => (
           <CharacterCard
             key={character._id}
@@ -21,6 +26,14 @@ export const CharacterList = ({ resourceType }) => {
             characterListState={{ characters, setCharacters }}
           />
         ))}
+      {characters && !characters.length && (
+        <Link
+          className='text-center btn btn-success col-md-2 offset-md-5 col-4 offset-4'
+          to={`/create/${resourceType}`}>
+          {addCharacterLabel}
+        </Link>
+      )}
+      {console.log(characters)}
     </section>
   );
 };

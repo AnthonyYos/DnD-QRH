@@ -20,10 +20,6 @@ app.use(cors());
 app.use('/api/v1/players', playerRoutes);
 app.use('/api/v1/enemies', enemyRoutes);
 
-app.all('*', (req, res, next) => {
-  next(new ExpressError('Resource Not Found', 404));
-});
-
 app.use(errorHandler);
 
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}.`));

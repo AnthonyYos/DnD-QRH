@@ -8,7 +8,7 @@ const noPlayerError = { statusCode: 404, message: 'Player not found.' };
 const getPlayers = async (req, res, next) => {
   // const players = await Player.find({}, '_id');
   const players = await Player.find({ type: 'player' }).sort({ name: 'asc' });
-  if (!players) throw noPlayersError;
+  if (!players.length) throw noPlayersError;
   return res.status(200).json({ success: true, data: players });
 };
 

@@ -3,6 +3,7 @@ import CharacterCard from './CharacterCard/CharacterCard';
 import useFetch from '../../hooks/useFetch';
 import ApiEndpoint from '../../context/ResourceType';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 export const CharacterList = ({ resourceType }) => {
   const {
@@ -16,6 +17,8 @@ export const CharacterList = ({ resourceType }) => {
 
   return (
     <section className='row m-3'>
+      {isPending && <LoadingSpinner />}
+      {error && <div>{error}</div>}
       {characters &&
         characters.length > 0 &&
         characters.map(character => (

@@ -9,6 +9,7 @@ import Button from '../UI/Button';
 import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
 import { update } from '../../util/functions/update';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 export default function UpdateCharacter({ resourceType }) {
   const navigate = useNavigate();
@@ -53,6 +54,8 @@ export default function UpdateCharacter({ resourceType }) {
 
   return (
     <React.Fragment>
+      {isPending && <LoadingSpinner />}
+      {error && <div>{error}</div>}
       {character && (
         <section className='row'>
           <div className='col-sm-4 offset-sm-4 card'>

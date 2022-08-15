@@ -3,7 +3,6 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const errorHandler = require('./util/Errors/errorHandler');
-const ExpressError = require('./util/Errors/ExpressError');
 const { connectDB } = require('./config/database');
 const playerRoutes = require('./routes/player');
 const enemyRoutes = require('./routes/enemy');

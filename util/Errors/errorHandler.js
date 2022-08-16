@@ -3,7 +3,7 @@ module.exports = function errorHandler(err, req, res, next) {
   if (res.headersSent) {
     return next(err);
   }
-  const { statusCode } = err;
+  const { status } = err;
   if (!err.message) err.message = 'Something went bad';
-  res.status(statusCode).json({ success: false, error: err.message });
+  res.status(status).json({ success: false, error: err.message });
 };

@@ -1,14 +1,12 @@
 const Enemy = require('../models/character');
-const noEnemiesError = { statusCode: 404, message: 'Enemies not found.' };
-const noEnemyError = { statusCode: 404, message: 'Enemy not found.' };
+const noEnemiesError = { status: 404, message: 'Enemies not found.' };
+const noEnemyError = { status: 404, message: 'Enemy not found.' };
 
 //@desc Get all enemies
 //@route GET /api/v1/enemies
 //@access Public
 const getEnemies = async (req, res, next) => {
-  // const enemies = await Enemy.find({}, '_id');
   const enemies = await Enemy.find({ type: 'enemy' }).sort({ name: 'asc' });
-  if (!enemies.length) throw noEnemiesError;
   return res.status(200).json({ success: true, data: enemies });
 };
 

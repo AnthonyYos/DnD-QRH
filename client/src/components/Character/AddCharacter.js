@@ -16,30 +16,14 @@ export default function AddCharacter({ resourceType }) {
   const characterType = resourceType === ApiEndpoint.PLAYER ? 'player' : 'enemy';
 
   const onSubmit = formData => {
+    const { str, dex, con, int, wis, cha, ...partialData } = formData;
+    const { str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod, ...rest } = partialData;
+
     const newCharacter = {
       type: characterType,
-      name: formData.name,
-      race: formData.race,
-      armorClass: formData.armorClass,
-      health: formData.health,
-      speed: formData.speed,
-      alignment: formData.alignment,
-      stats: {
-        str: formData.str,
-        dex: formData.dex,
-        con: formData.con,
-        int: formData.int,
-        wis: formData.wis,
-        cha: formData.cha,
-      },
-      modifiers: {
-        str_mod: formData.str_mod,
-        dex_mod: formData.dex_mod,
-        con_mod: formData.con_mod,
-        int_mod: formData.int_mod,
-        wis_mod: formData.wis_mod,
-        cha_mod: formData.cha_mod,
-      },
+      ...rest,
+      stats: { str, dex, con, int, wis, cha },
+      modifiers: { str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod },
     };
     try {
       console.log(newCharacter);

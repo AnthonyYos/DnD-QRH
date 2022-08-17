@@ -1,12 +1,14 @@
 const Player = require('../models/character');
 const noPlayersError = { status: 404, message: 'Players not found.' };
 const noPlayerError = { status: 404, message: 'Player not found.' };
+const characterDAO = require('../service/characterDAO');
+const resourceType = 'player';
 
 //@desc Get all player
 //@route GET /api/v1/player
 //@access Public
 const getPlayers = async (req, res, next) => {
-  const players = await Player.find({ type: 'player' }).sort({ name: 'asc' });
+  const players = await characterDAO.getCharacters({}, resourceType);
   return res.status(200).json({ success: true, data: players });
 };
 
@@ -14,7 +16,7 @@ const getPlayers = async (req, res, next) => {
 //@route GET /api/v1/player
 //@access Public
 const findPlayer = async (req, res, next) => {
-  const player = await Player.findById(req.params.id);
+  const player = await await characterDAO.findCharacter(req.params.id);
   if (!player) throw noPlayerError;
   return res.status(200).json({ success: true, data: player });
 };
@@ -23,7 +25,7 @@ const findPlayer = async (req, res, next) => {
 //@route post /api/v1/player
 //@access Public
 const addPlayer = async (req, res, next) => {
-  const newPlayer = await Player.create(req.body);
+  const newPlayer = await characterDAO.createCharacter(req.body);
   res.status(200).json({ success: true, data: newPlayer });
 };
 
@@ -31,7 +33,7 @@ const addPlayer = async (req, res, next) => {
 //@route Put /api/v1/player/:id
 //@access Public
 const updatePlayer = async (req, res, next) => {
-  const player = await Player.findByIdAndUpdate(req.params.id, req.body);
+  const player = await characterDAO.updateCharacter(req.params.id, req.body);
   if (!player) throw noPlayerError;
   return res.status(200).json({ success: true, data: player });
 };
@@ -40,7 +42,7 @@ const updatePlayer = async (req, res, next) => {
 //@route delete /api/v1/player/:id
 //@access Public
 const deletePlayer = async (req, res, next) => {
-  const player = await Player.findByIdAndDelete(req.params.id);
+  const player = await characterDAO.deleteCharacter(req.params.id);
   if (!player) throw noPlayerError;
   return res.status(200).json({ success: true, data: {} });
 };

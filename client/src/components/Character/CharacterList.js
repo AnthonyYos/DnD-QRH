@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CharacterCard from './CharacterCard/CharacterCard';
 import useFetch from '../../hooks/useFetch';
 import ApiEndpoint from '../../context/ResourceType';
@@ -6,18 +6,34 @@ import { Link } from 'react-router-dom';
 import LoadingSpinner from '../UI/LoadingSpinner';
 
 export const CharacterList = ({ resourceType }) => {
-  const {
-    data: characters,
-    isPending,
-    error,
-    setData: setCharacters,
-  } = useFetch(`/api/v1/${resourceType}`);
+  const [url, setUrl] = useState(`/api/v1/${resourceType}`);
+  const [search, setSearch] = useState(null);
+
+  useEffect(() => {
+    setUrl(`/api/v1/${resourceType}`);
+  }, [resourceType]);
+  const { data: characters, isPending, error, setData: setCharacters } = useFetch(url);
+
+  useEffect(() => {
+    const searchLookup = setTimeout(() => {
+      if (search) setUrl(`/api/v1/${resourceType}?query1=${search}`);
+    }, 2000);
+    return () => {
+      console.log('clearing searchLookup');
+      clearTimeout(searchLookup);
+    };
+  }, [search]);
+
+  const handleSearch = e => {
+    setSearch(e.target.value);
+  };
 
   const addCharacterLabel = resourceType === ApiEndpoint.PLAYER ? 'Add Player' : 'Add Enemy';
   const characterType = resourceType === ApiEndpoint.PLAYER ? 'players' : 'enemy';
 
   return (
     <section className='row m-3'>
+      <input type='text' onChange={handleSearch} />
       {isPending && <LoadingSpinner />}
       {error && <div>{error}</div>}
       {characters && !characters.length && (

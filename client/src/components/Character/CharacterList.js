@@ -6,30 +6,32 @@ import { Link } from 'react-router-dom';
 import LoadingSpinner from '../UI/LoadingSpinner';
 
 export const CharacterList = ({ resourceType }) => {
-  const [url, setUrl] = useState(`/api/v1/${resourceType}`);
+  const apiUrl = `/api/v1/${resourceType}`;
+  const [url, setUrl] = useState(apiUrl);
   const [search, setSearch] = useState(null);
 
-  useEffect(() => {
-    setUrl(`/api/v1/${resourceType}`);
-  }, [resourceType]);
+  // useEffect(() => {
+  //   setUrl(`/api/v1/${resourceType}`);
+  // }, [resourceType]);
+
   const { data: characters, isPending, error, setData: setCharacters } = useFetch(url);
 
   useEffect(() => {
     const searchLookup = setTimeout(() => {
-      if (search) setUrl(`/api/v1/${resourceType}?query1=${search}`);
-    }, 2000);
+      if (search) setUrl(apiUrl + `?query1=${search}`);
+      else setUrl(apiUrl);
+    }, 1000);
     return () => {
-      console.log('clearing searchLookup');
       clearTimeout(searchLookup);
     };
-  }, [search]);
+  }, [search, apiUrl]);
 
   const handleSearch = e => {
     setSearch(e.target.value);
   };
 
   const addCharacterLabel = resourceType === ApiEndpoint.PLAYER ? 'Add Player' : 'Add Enemy';
-  const characterType = resourceType === ApiEndpoint.PLAYER ? 'players' : 'enemy';
+  const characterType = resourceType === ApiEndpoint.PLAYER ? 'Player(s)' : 'Enemy / Enemies';
 
   return (
     <section className='row m-3'>
@@ -38,7 +40,7 @@ export const CharacterList = ({ resourceType }) => {
       {error && <div>{error}</div>}
       {characters && !characters.length && (
         <React.Fragment>
-          <h3 className='text-center mb-3'>No {`${characterType}`} have been added</h3>
+          <h3 className='text-center mb-3'>No {`${characterType}`} were found</h3>
           <Link
             className='text-center btn btn-success col-md-2 offset-md-5 col-4 offset-4'
             to={`/create/${resourceType}`}>

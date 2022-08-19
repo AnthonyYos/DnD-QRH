@@ -8,7 +8,9 @@ export default function useFetch(url) {
 
   useEffect(() => {
     const abortController = new AbortController();
+    setData(null);
     setIsPending(true);
+    setError(null);
     const fetchData = async () => {
       try {
         const res = await axios.get(url, { signal: abortController.signal });

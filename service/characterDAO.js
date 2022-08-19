@@ -6,22 +6,18 @@ const getCharacters = async ({ filter = null, value = null } = {}, resourceType)
   else
     switch (filter) {
       case 'race': {
-        console.log('race');
         query = { race: value, type: `${resourceType}` };
         break;
       }
       case 'name': {
-        console.log('name');
         query = { name: value, type: `${resourceType}` };
         break;
       }
       case 'alignment': {
-        console.log('alignment');
         query = { alignment: value, type: `${resourceType}` };
         break;
       }
       default: {
-        console.log('default');
         query = { type: `${resourceType}` };
         break;
       }

@@ -8,9 +8,10 @@ import { deleteResource } from '../../../util/functions/delete';
 
 export default function CharacterCard({ character, resourceType, characterListState }) {
   const deleteHandler = () => {
+    const res = deleteResource(character._id, resourceType);
     const newList = characterListState.characters.filter(c => c._id !== character._id);
     characterListState.setCharacters(newList);
-    return deleteResource(character._id, resourceType);
+    return res;
   };
 
   return (

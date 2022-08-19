@@ -28,7 +28,7 @@ export const CharacterList = ({ resourceType }) => {
     return () => {
       clearTimeout(searchLookup);
     };
-  }, [searchTerm, apiUrl]);
+  }, [searchTerm, searchFilter, apiUrl]);
 
   const handleSearchTerm = e => {
     setSearchTerm(e.target.value);

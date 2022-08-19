@@ -8,7 +8,8 @@ const resourceType = 'enemy';
 //@route GET /api/v1/enemies
 //@access Public
 const getEnemies = async (req, res, next) => {
-  const enemies = await characterDAO.getCharacters({}, resourceType);
+  const { filter, query } = req.query || {};
+  const enemies = await characterDAO.getCharacters({ filter, value: query }, resourceType);
   return res.status(200).json({ success: true, data: enemies });
 };
 

@@ -8,7 +8,8 @@ const resourceType = 'player';
 //@route GET /api/v1/player
 //@access Public
 const getPlayers = async (req, res, next) => {
-  const players = await characterDAO.getCharacters({}, resourceType);
+  const { filter, query } = req.query || {};
+  const players = await characterDAO.getCharacters({ filter, value: query }, resourceType);
   return res.status(200).json({ success: true, data: players });
 };
 

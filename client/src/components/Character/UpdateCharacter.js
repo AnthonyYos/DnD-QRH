@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
-import ApiEndpoint from '../../context/ResourceType';
+import ApiEndpoint from '../../util/ResourceType';
 import Form from '../Form/Form';
 import Input from '../Form/Input';
 import Select from '../Form/Select';

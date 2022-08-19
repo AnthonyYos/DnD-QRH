@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CharacterList } from './components/Character/CharacterList';
 import AddCharacter from './components/Character/AddCharacter';
 import Navbar from './components/UI/Navbar';
-import ApiEndPoint from './context/ResourceType';
+import ApiEndPoint from './util/ResourceType';
 import UpdateCharacter from './components/Character/UpdateCharacter';
 
 function App() {

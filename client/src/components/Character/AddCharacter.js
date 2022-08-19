@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ApiEndpoint from '../../context/ResourceType';
+import ApiEndpoint from '../../util/ResourceType';
 import { add } from '../../util/functions/add';
 import Form from '../Form/Form';
 import Input from '../Form/Input';

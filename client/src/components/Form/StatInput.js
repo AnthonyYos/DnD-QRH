@@ -1,5 +1,5 @@
 import React from 'react';
-import ApiEndpoint from '../../context/ResourceType';
+import ApiEndpoint from '../../util/ResourceType';
 import Input from './Input';
 
 export default function StatInput({ register, name, label, className, characterType, ...rest }) {

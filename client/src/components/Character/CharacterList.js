@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CharacterCard from './CharacterCard/CharacterCard';
 import useFetch from '../../hooks/useFetch';
-import ApiEndpoint from '../../context/ResourceType';
+import ApiEndpoint from '../../util/ResourceType';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import SearchInput from '../Search/SearchInput';
@@ -19,7 +19,7 @@ export const CharacterList = ({ resourceType }) => {
   // Resets search field when switching between CharacterList for players & enemies
   useEffect(() => setSearchTerm(''), [apiUrl]);
 
-  // Sets a new url to be useed by useFetch when searchTerm changes
+  // Sets a new url to be useed by useFetch when searchTerm/searchFilter changes
   useEffect(() => {
     const searchLookup = setTimeout(() => {
       if (searchTerm) setUrl(apiUrl + `?filter=${searchFilter}&query=${searchTerm}`);
@@ -43,6 +43,7 @@ export const CharacterList = ({ resourceType }) => {
 
   return (
     <React.Fragment>
+      {/* Search fields */}
       <section className='row mt-3'>
         <div className='offset-4'>
           <SearchSelect
@@ -61,7 +62,6 @@ export const CharacterList = ({ resourceType }) => {
             className='m-2'
             onChange={handleSearchTerm}
           />
-          {/* <input type='text' onChange={handleSearch} value={search} /> */}
         </div>
       </section>
       <section className='row m-3'>

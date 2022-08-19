@@ -8,7 +8,7 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 export const CharacterList = ({ resourceType }) => {
   const apiUrl = `/api/v1/${resourceType}`;
   const [url, setUrl] = useState(apiUrl);
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState('');
 
   // useEffect(() => {
   //   setUrl(`/api/v1/${resourceType}`);
@@ -16,11 +16,14 @@ export const CharacterList = ({ resourceType }) => {
 
   const { data: characters, isPending, error, setData: setCharacters } = useFetch(url);
 
+  useEffect(() => setSearch(''), [apiUrl]);
+
   useEffect(() => {
     const searchLookup = setTimeout(() => {
-      if (search) setUrl(apiUrl + `?query1=${search}`);
-      else setUrl(apiUrl);
-    }, 1000);
+      if (search) {
+        setUrl(apiUrl + `?query1=${search}`);
+      } else setUrl(apiUrl);
+    }, 500);
     return () => {
       clearTimeout(searchLookup);
     };
@@ -35,7 +38,7 @@ export const CharacterList = ({ resourceType }) => {
 
   return (
     <section className='row m-3'>
-      <input type='text' onChange={handleSearch} />
+      <input type='text' onChange={handleSearch} value={search} />
       {isPending && <LoadingSpinner />}
       {error && <div>{error}</div>}
       {characters && !characters.length && (

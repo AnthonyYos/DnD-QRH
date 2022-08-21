@@ -1,13 +1,17 @@
 const router = require('express').Router();
 const wrapAsync = require('../middleware/wrapAsync');
-const player = require('../controllers/player');
+const characterController = require('../controllers/character');
 
-router.route('/').get(wrapAsync(player.getPlayers)).post(wrapAsync(player.addPlayer));
+router
+  .route('/')
+  // getCharacters gets called and returns the async function, which is the passed to wrapAsync
+  .get(wrapAsync(characterController.getCharacters('player')))
+  .post(wrapAsync(characterController.addCharacter));
 
 router
   .route('/:id')
-  .get(wrapAsync(player.findPlayer))
-  .put(wrapAsync(player.updatePlayer))
-  .delete(wrapAsync(player.deletePlayer));
+  .get(wrapAsync(characterController.findCharacter))
+  .put(wrapAsync(characterController.updateCharacter))
+  .delete(wrapAsync(characterController.deleteCharacter));
 
 module.exports = router;

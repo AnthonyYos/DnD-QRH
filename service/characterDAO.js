@@ -1,16 +1,17 @@
 const Character = require('../models/character');
 
+// Find character(s) based on search value/filter or by type
 const getCharacters = async ({ filter = null, value = null } = {}, resourceType) => {
   let query;
   if (!value) query = { type: `${resourceType}` };
   else
     switch (filter) {
-      case 'race': {
-        query = { race: value, type: `${resourceType}` };
-        break;
-      }
       case 'name': {
         query = { name: value, type: `${resourceType}` };
+        break;
+      }
+      case 'race': {
+        query = { race: value, type: `${resourceType}` };
         break;
       }
       case 'alignment': {
@@ -26,21 +27,25 @@ const getCharacters = async ({ filter = null, value = null } = {}, resourceType)
   return characters;
 };
 
+// Find character based on the object id
 const findCharacter = async id => {
   const character = await Character.findById(id);
   return character;
 };
 
+// Create a new character using characterInfo(req.body)
 const createCharacter = async characterInfo => {
   const newCharacter = await Character.create(characterInfo);
   return newCharacter;
 };
 
+// Find and update a character using characterInfo(req.body)
 const updateCharacter = async (id, characterInfo) => {
   const updatedCharacter = Character.findByIdAndUpdate(id, characterInfo);
   return updatedCharacter;
 };
 
+// Find and delete character by object id
 const deleteCharacter = async id => {
   const character = await Character.findByIdAndDelete(id);
   return character;

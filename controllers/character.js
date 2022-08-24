@@ -1,8 +1,6 @@
 const Enemy = require('../models/character');
-const noEnemiesError = { status: 404, message: 'Enemies not found.' };
-const noEnemyError = { status: 404, message: 'Enemy not found.' };
+const noCharacterError = { status: 404, message: 'Character not found.' };
 const characterDAO = require('../service/characterDAO');
-const resourceType = 'enemy';
 
 //@desc Get all characters of a type
 //@route GET /api/v1/'resource type'
@@ -20,7 +18,7 @@ const getCharacters = role => {
 //@access Public
 const findCharacter = async (req, res, next) => {
   const character = await characterDAO.findCharacter(req.params.id);
-  if (!character) throw noEnemyError;
+  if (!character) throw noCharacterError;
   return res.status(200).json({ success: true, data: character });
 };
 
@@ -37,7 +35,7 @@ const addCharacter = async (req, res, next) => {
 //@access Public
 const updateCharacter = async (req, res, next) => {
   const enemy = await characterDAO.updateCharacter(req.params.id, req.body);
-  if (!enemy) throw noEnemyError;
+  if (!enemy) throw noCharacterError;
   return res.status(200).json({ success: true, data: enemy });
 };
 
@@ -46,7 +44,7 @@ const updateCharacter = async (req, res, next) => {
 //@access Public
 const deleteCharacter = async (req, res, next) => {
   const enemy = await characterDAO.deleteCharacter(req.params.id);
-  if (!enemy) throw noEnemyError;
+  if (!enemy) throw noCharacterError;
   return res.status(200).json({ success: true, data: {} });
 };
 

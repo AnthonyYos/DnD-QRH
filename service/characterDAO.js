@@ -4,18 +4,19 @@ const Character = require('../models/character');
 const getCharacters = async ({ filter = null, value = null } = {}, resourceType) => {
   let query;
   if (!value) query = { type: `${resourceType}` };
-  else
+  else {
+    let regex = new RegExp(value, 'i');
     switch (filter) {
       case 'name': {
-        query = { name: value, type: `${resourceType}` };
+        query = { name: regex, type: `${resourceType}` };
         break;
       }
       case 'race': {
-        query = { race: value, type: `${resourceType}` };
+        query = { race: regex, type: `${resourceType}` };
         break;
       }
       case 'alignment': {
-        query = { alignment: value, type: `${resourceType}` };
+        query = { alignment: regex, type: `${resourceType}` };
         break;
       }
       default: {
@@ -23,6 +24,7 @@ const getCharacters = async ({ filter = null, value = null } = {}, resourceType)
         break;
       }
     }
+  }
   const characters = await Character.find(query).sort({ name: 'asc' });
   return characters;
 };

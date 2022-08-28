@@ -1,4 +1,3 @@
-const Enemy = require('../models/character');
 const noCharacterError = { status: 404, message: 'Character not found.' };
 const characterDAO = require('../service/characterDAO');
 

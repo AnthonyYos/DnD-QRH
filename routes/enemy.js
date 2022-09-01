@@ -9,7 +9,10 @@ router
   .get(wrapAsync(characterController.getCharacters('enemy')))
   .post(wrapAsync(characterController.addCharacter));
 
-router.route('/party').get(wrapAsync(partyController.getParties('enemy')));
+router
+  .route('/party')
+  .get(wrapAsync(partyController.getParties('enemy')))
+  .post(wrapAsync(partyController.addParty));
 router
   .route('/party/:id')
   .get(wrapAsync(partyController.findParty))

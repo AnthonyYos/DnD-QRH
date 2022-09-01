@@ -4,11 +4,11 @@ const characterDAO = require('../service/characterDAO');
 //@desc Get all characters of a type
 //@route GET /api/v1/'resource type'
 //@access Public
-const getCharacters = role => {
+const getCharacters = resourceType => {
   return async function (req, res, next) {
     const { filter, query } = req.query || {};
-    const enemies = await characterDAO.getCharacters({ filter, value: query }, role);
-    return res.status(200).json({ success: true, data: enemies });
+    const characters = await characterDAO.getCharacters({ filter, value: query }, resourceType);
+    return res.status(200).json({ success: true, data: characters });
   };
 };
 
@@ -25,25 +25,25 @@ const findCharacter = async (req, res, next) => {
 //@route post /api/v1/'resource type'
 //@access Public
 const addCharacter = async (req, res, next) => {
-  const newEnemy = await characterDAO.createCharacter(req.body);
-  res.status(200).json({ success: true, data: newEnemy });
+  const newCharacters = await characterDAO.createCharacter(req.body);
+  res.status(200).json({ success: true, data: newCharacters });
 };
 
 //@desc Put find/update character by id
 //@route Put /api/v1/'resource type'/:id
 //@access Public
 const updateCharacter = async (req, res, next) => {
-  const enemy = await characterDAO.updateCharacter(req.params.id, req.body);
-  if (!enemy) throw noCharacterError;
-  return res.status(200).json({ success: true, data: enemy });
+  const character = await characterDAO.updateCharacter(req.params.id, req.body);
+  if (!character) throw noCharacterError;
+  return res.status(200).json({ success: true, data: character });
 };
 
 //@desc Delete find/delete character by id
 //@route delete /api/v1/'resource type'/:id
 //@access Public
 const deleteCharacter = async (req, res, next) => {
-  const enemy = await characterDAO.deleteCharacter(req.params.id);
-  if (!enemy) throw noCharacterError;
+  const character = await characterDAO.deleteCharacter(req.params.id);
+  if (!character) throw noCharacterError;
   return res.status(200).json({ success: true, data: {} });
 };
 

@@ -10,7 +10,7 @@ const partySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    members: [
+    characters: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Character',

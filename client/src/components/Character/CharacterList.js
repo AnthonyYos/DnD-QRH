@@ -57,7 +57,7 @@ export const CharacterList = ({ resourceType }) => {
             name='search'
             type='text'
             label='Search'
-            placeholder='Search...'
+            placeholder={`Search by ${searchFilter}...`}
             value={searchTerm}
             className='m-2'
             onChange={handleSearchTerm}

@@ -2,17 +2,19 @@ const router = require('express').Router();
 const wrapAsync = require('../middleware/wrapAsync');
 const characterController = require('../controllers/character');
 const partyController = require('../controllers/party');
+const resourceType = 'player';
 
 router
   .route('/')
   // getCharacters gets called and returns the async function, which is the passed to wrapAsync
-  .get(wrapAsync(characterController.getCharacters('player')))
+  .get(wrapAsync(characterController.getCharacters(resourceType)))
   .post(wrapAsync(characterController.addCharacter));
 
 router
   .route('/party')
-  .get(wrapAsync(partyController.getParties('player')))
+  .get(wrapAsync(partyController.getParties(resourceType)))
   .post(wrapAsync(partyController.addParty));
+
 router
   .route('/party/:id')
   .get(wrapAsync(partyController.findParty))

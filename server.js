@@ -1,24 +1,8 @@
 require('dotenv').config({ path: './config/config.env' });
-const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
-const errorHandler = require('./util/Errors/errorHandler');
-const { connectDB } = require('./config/database');
-const playerRoutes = require('./routes/player');
-const enemyRoutes = require('./routes/enemy');
+const makeApp = require('./app');
+const database = require('./config/database');
 
+const app = makeApp(database);
 const PORT = process.env.PORT || 5000;
-connectDB();
-const app = express();
-
-if (process.env.NODE_ENV !== 'production') {
-  app.use(morgan('dev'));
-}
-app.use(express.json());
-app.use(cors());
-app.use('/api/v1/players', playerRoutes);
-app.use('/api/v1/enemies', enemyRoutes);
-
-app.use(errorHandler);
 
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}.`));

@@ -1,6 +1,7 @@
 import axios from 'axios';
+import ApiUrl from '../apiUrl';
 
-export async function add(data, resourceType) {
+export async function add(data, url) {
   const config = {
     headers: {
       'Content-type': 'application/json',
@@ -8,7 +9,7 @@ export async function add(data, resourceType) {
   };
 
   try {
-    await axios.post(`/api/v1/${resourceType}`, data, config);
+    await axios.post(url, data, config);
   } catch (err) {
     console.log(err);
   }

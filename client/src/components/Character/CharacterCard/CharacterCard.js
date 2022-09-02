@@ -5,10 +5,12 @@ import CharacterStats from './CharacterStats';
 import Button from '../../UI/Button';
 import { Link } from 'react-router-dom';
 import { deleteResource } from '../../../util/functions/delete';
+import ApiUrl from '../../../util/apiUrl';
 
 export default function CharacterCard({ character, resourceType, characterListState }) {
   const deleteHandler = () => {
-    const res = deleteResource(character._id, resourceType);
+    const url = `${ApiUrl.CHARACTER}${resourceType + character._id}`;
+    const res = deleteResource(url);
     const newList = characterListState.characters.filter(c => c._id !== character._id);
     characterListState.setCharacters(newList);
     return res;

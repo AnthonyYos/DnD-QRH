@@ -8,6 +8,7 @@ import Select from '../Form/Select';
 import Button from '../UI/Button';
 import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
+import ApiUrl from '../../util/apiUrl';
 
 export default function AddCharacter({ resourceType }) {
   const navigate = useNavigate();
@@ -25,9 +26,11 @@ export default function AddCharacter({ resourceType }) {
       stats: { str, dex, con, int, wis, cha },
       modifiers: { str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod },
     };
+
     try {
       console.log(newCharacter);
-      add(newCharacter, resourceType);
+      const url = `${ApiUrl.CHARACTER}${resourceType}`;
+      add(newCharacter, url);
       switch (resourceType) {
         case ApiEndpoint.PLAYER:
           return navigate('/players');
@@ -99,7 +102,6 @@ export default function AddCharacter({ resourceType }) {
               className='row m-3'
               characterType={characterType}
             />
-            {/* <StatsInput type='number' stats={['str']} /> */}
             <Button className='btn btn-success offset-4 col-4' type='submit'>
               {btnLabel}
             </Button>

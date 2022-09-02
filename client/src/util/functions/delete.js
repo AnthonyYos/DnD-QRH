@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export async function deleteResource(id, resourceType) {
+export async function deleteResource(url) {
   try {
-    await axios.delete(`/api/v1/${resourceType}/${id}`);
+    await axios.delete(url);
   } catch (err) {
     console.log(err);
   }

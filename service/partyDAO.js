@@ -37,12 +37,13 @@ const createParty = async partyInfo => {
   return newParty;
 };
 
-// Find
+// Find party by id and update using partyInfo
 const updateParty = async (id, partyInfo) => {
   const updatedParty = await Party.findByIdAndUpdate(id, partyInfo);
   return updatedParty;
 };
 
+// Find party by id and delete
 const deleteParty = async id => {
   const deletedParty = await Party.findByIdAndDelete(id);
   return deleteParty;

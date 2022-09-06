@@ -6,15 +6,21 @@ import Button from '../../UI/Button';
 import { Link } from 'react-router-dom';
 import { deleteResource } from '../../../util/functions/delete';
 import ApiUrl from '../../../util/apiUrl';
+import CharacterType from '../../../util/CharacterTypeURL';
 
 export default function CharacterCard({ character, resourceType, characterListState }) {
   const deleteHandler = () => {
-    const url = `${ApiUrl.CHARACTER}${resourceType + character._id}`;
+    const url = `${ApiUrl.CHARACTERS}${character._id}`;
     const res = deleteResource(url);
     const newList = characterListState.characters.filter(c => c._id !== character._id);
     characterListState.setCharacters(newList);
     return res;
   };
+
+  const updateLink =
+    character.type === CharacterType.PLAYER
+      ? `/players/${character._id}`
+      : `/enemies/${character._id}`;
 
   return (
     <div className='col-sm-4 mb-4'>
@@ -38,9 +44,7 @@ export default function CharacterCard({ character, resourceType, characterListSt
             />
           </section>
           <section className='row mx-2'>
-            <Link
-              className='btn btn-info col-lg-3 offset-lg-2 col-5'
-              to={`/${resourceType}/${character._id}`}>
+            <Link className='btn btn-info col-lg-3 offset-lg-2 col-5' to={updateLink}>
               Update
             </Link>
             <Button

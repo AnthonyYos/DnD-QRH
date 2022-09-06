@@ -4,12 +4,10 @@ const characterDAO = require('../service/characterDAO');
 //@desc Get all characters of a type
 //@route GET /api/v1/'resource type'
 //@access Public
-const getCharacters = resourceType => {
-  return async function (req, res, next) {
-    const { filter, query } = req.query || {};
-    const characters = await characterDAO.getCharacters({ filter, value: query }, resourceType);
-    return res.status(200).json({ success: true, data: characters });
-  };
+const getCharacters = async (req, res, next) => {
+  const { filter, query, characterType } = req.query || {};
+  const characters = await characterDAO.getCharacters({ filter, value: query }, characterType);
+  return res.status(200).json({ success: true, data: characters });
 };
 
 //@desc Get character by id

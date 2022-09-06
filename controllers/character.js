@@ -23,8 +23,8 @@ const findCharacter = async (req, res, next) => {
 //@route post /api/v1/'resource type'
 //@access Public
 const addCharacter = async (req, res, next) => {
-  const newCharacters = await characterDAO.createCharacter(req.body);
-  res.status(200).json({ success: true, data: newCharacters });
+  const newCharacter = await characterDAO.createCharacter(req.body);
+  res.status(200).json({ success: true, data: newCharacter });
 };
 
 //@desc Put find/update character by id

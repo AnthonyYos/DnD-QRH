@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import CharacterCard from './CharacterCard/CharacterCard';
 import useFetch from '../../hooks/useFetch';
-import ApiEndpoint from '../../util/ResourceType';
+import CharacterType from '../../util/CharacterTypeURL';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import SearchInput from '../Search/SearchInput';
 import SearchSelect from '../Search/SearchSelect';
-import { searchOptions } from '../../util/searchOptions';
+import { characterSearchFilters } from '../../util/characterSearchFilters';
+import ApiUrl from '../../util/apiUrl';
 
-export const CharacterList = ({ resourceType }) => {
-  const apiUrl = `/api/v1/${resourceType}`;
+export const CharacterList = ({ characterType }) => {
+  const apiUrl = `${ApiUrl.CHARACTERS}?characterType=${characterType}`;
   const [url, setUrl] = useState(apiUrl);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchFilter, setSearchFilter] = useState('name');
@@ -22,7 +23,7 @@ export const CharacterList = ({ resourceType }) => {
   // Sets a new url to be useed by useFetch when searchTerm/searchFilter changes
   useEffect(() => {
     const searchLookup = setTimeout(() => {
-      if (searchTerm) setUrl(apiUrl + `?filter=${searchFilter}&query=${searchTerm}`);
+      if (searchTerm) setUrl(apiUrl + `&filter=${searchFilter}&query=${searchTerm}`);
       else setUrl(apiUrl);
     }, 500);
     return () => {
@@ -38,8 +39,9 @@ export const CharacterList = ({ resourceType }) => {
     setSearchFilter(e.target.value.toLowerCase());
   };
 
-  const addCharacterLabel = resourceType === ApiEndpoint.PLAYER ? 'Add Player' : 'Add Enemy';
-  const characterType = resourceType === ApiEndpoint.PLAYER ? 'Player(s)' : 'Enemy / Enemies';
+  const addCharacterLabel = characterType === CharacterType.PLAYER ? 'Add Player' : 'Add Enemy';
+  const noCharacterLabel = characterType === CharacterType.PLAYER ? 'Player(s)' : 'Enemy / Enemies';
+  const addBtnLink = characterType === CharacterType.PLAYER ? `/create/players` : `/create/enemies`;
 
   return (
     <React.Fragment>
@@ -50,7 +52,7 @@ export const CharacterList = ({ resourceType }) => {
             name='filter'
             label='Filter'
             className='m-2'
-            options={searchOptions}
+            options={characterSearchFilters}
             onChange={handleSearchFilter}
           />
           <SearchInput
@@ -70,10 +72,10 @@ export const CharacterList = ({ resourceType }) => {
         {error && <div>{error}</div>}
         {characters && !characters.length && (
           <React.Fragment>
-            <h3 className='text-center mb-3'>No {`${characterType}`} were found</h3>
+            <h3 className='text-center mb-3'>No {`${noCharacterLabel}`} were found</h3>
             <Link
               className='text-center btn btn-success col-md-2 offset-md-5 col-4 offset-4'
-              to={`/create/${resourceType}`}>
+              to={addBtnLink}>
               {addCharacterLabel}
             </Link>
           </React.Fragment>
@@ -85,7 +87,6 @@ export const CharacterList = ({ resourceType }) => {
             <CharacterCard
               key={character._id}
               character={character}
-              resourceType={resourceType}
               characterListState={{ characters, setCharacters }}
             />
           ))}

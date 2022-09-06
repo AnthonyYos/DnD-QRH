@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CharacterList } from './components/Character/CharacterList';
 import AddCharacter from './components/Character/AddCharacter';
 import Navbar from './components/UI/Navbar';
-import ApiEndPoint from './util/ResourceType';
 import UpdateCharacter from './components/Character/UpdateCharacter';
 import { PartyList } from './components/Party/PartyList';
+import CharacterType from './util/CharacterTypeURL';
 
 function App() {
   return (
@@ -13,19 +13,25 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<h1>Homepage</h1>} />
-        <Route path='/create/enemies' element={<AddCharacter resourceType={ApiEndPoint.ENEMY} />} />
-        <Route path='/enemies' element={<CharacterList resourceType={ApiEndPoint.ENEMY} />} />
-        <Route path='/enemies/party' element={<PartyList resourceType={ApiEndPoint.ENEMY} />} />
-        <Route path='/enemies/:id' element={<UpdateCharacter resourceType={ApiEndPoint.ENEMY} />} />
+        <Route
+          path='/create/enemies'
+          element={<AddCharacter characterType={CharacterType.ENEMY} />}
+        />
+        <Route path='/enemies' element={<CharacterList characterType={CharacterType.ENEMY} />} />
+        <Route path='/enemies/party' element={<PartyList characterType={CharacterType.ENEMY} />} />
+        <Route
+          path='/enemies/:id'
+          element={<UpdateCharacter characterType={CharacterType.ENEMY} />}
+        />
         <Route
           path='/create/players'
-          element={<AddCharacter resourceType={ApiEndPoint.PLAYER} />}
+          element={<AddCharacter characterType={CharacterType.PLAYER} />}
         />
-        <Route path='/players' element={<CharacterList resourceType={ApiEndPoint.PLAYER} />} />
-        <Route path='/players/party' element={<PartyList resourceType={ApiEndPoint.PLAYER} />} />
+        <Route path='/players' element={<CharacterList characterType={CharacterType.PLAYER} />} />
+        <Route path='/players/party' element={<PartyList characterType={CharacterType.PLAYER} />} />
         <Route
           path='/players/:id'
-          element={<UpdateCharacter resourceType={ApiEndPoint.PLAYER} />}
+          element={<UpdateCharacter characterType={CharacterType.PLAYER} />}
         />
       </Routes>
     </BrowserRouter>

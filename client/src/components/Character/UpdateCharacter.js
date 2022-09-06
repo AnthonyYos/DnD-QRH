@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
-import ApiEndpoint from '../../util/ResourceType';
 import Form from '../Form/Form';
 import Input from '../Form/Input';
 import Select from '../Form/Select';
@@ -10,8 +9,10 @@ import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
 import { update } from '../../util/functions/update';
 import LoadingSpinner from '../UI/LoadingSpinner';
+import CharacterType from '../../util/CharacterTypeURL';
+import ApiUrl from '../../util/apiUrl';
 
-export default function UpdateCharacter({ resourceType }) {
+export default function UpdateCharacter({ characterType }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const {
@@ -19,11 +20,10 @@ export default function UpdateCharacter({ resourceType }) {
     isPending,
     error,
     setData: setCharacter,
-  } = useFetch(`/api/v1/${resourceType}/${id}`);
+  } = useFetch(`${ApiUrl.CHARACTERS}${id}`);
   const [updated, setUpdated] = useState();
 
-  const btnLabel = resourceType === ApiEndpoint.PLAYER ? 'Update Player' : 'Update Enemy';
-  const characterType = resourceType === ApiEndpoint.PLAYER ? 'player' : 'enemy';
+  const btnLabel = characterType === CharacterType.PLAYER ? 'Update Player' : 'Update Enemy';
 
   const onSubmit = e => {
     const { str, dex, con, int, wis, cha, ...partialData } = e;
@@ -35,17 +35,18 @@ export default function UpdateCharacter({ resourceType }) {
       modifiers: { str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod },
     };
     try {
-      console.log(updatedCharacter);
-      update(updatedCharacter, resourceType, id);
+      const url = `${ApiUrl.CHARACTERS}${id}`;
+      update(url, updatedCharacter);
       setUpdated(true);
-      switch (resourceType) {
-        case ApiEndpoint.PLAYER:
+      setCharacter(updatedCharacter);
+      switch (characterType) {
+        case CharacterType.PLAYER:
           return navigate(`/players/${id}`);
-        case ApiEndpoint.ENEMY:
+        case CharacterType.ENEMY:
           return navigate(`/enemies/${id}`);
         default:
           setUpdated(false);
-          return navigate(`/${resourceType}/${id}`);
+          return navigate(`${ApiUrl.CHARACTER}/${id}`);
       }
     } catch (error) {
       console.log(error, 'errrororor');

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ApiEndpoint from '../../util/ResourceType';
 import { add } from '../../util/functions/add';
 import Form from '../Form/Form';
 import Input from '../Form/Input';
@@ -9,12 +8,12 @@ import Button from '../UI/Button';
 import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
 import ApiUrl from '../../util/apiUrl';
+import CharacterType from '../../util/CharacterTypeURL';
 
-export default function AddCharacter({ resourceType }) {
+export default function AddCharacter({ characterType }) {
   const navigate = useNavigate();
 
-  const btnLabel = resourceType === ApiEndpoint.PLAYER ? 'Add Player' : 'Add Enemy';
-  const characterType = resourceType === ApiEndpoint.PLAYER ? 'player' : 'enemy';
+  const btnLabel = characterType === CharacterType.PLAYER ? 'Add Player' : 'Add Enemy';
 
   const onSubmit = formData => {
     const { str, dex, con, int, wis, cha, ...partialData } = formData;
@@ -29,12 +28,12 @@ export default function AddCharacter({ resourceType }) {
 
     try {
       console.log(newCharacter);
-      const url = `${ApiUrl.CHARACTER}${resourceType}`;
+      const url = `${ApiUrl.CHARACTERS}`;
       add(newCharacter, url);
-      switch (resourceType) {
-        case ApiEndpoint.PLAYER:
+      switch (characterType) {
+        case CharacterType.PLAYER:
           return navigate('/players');
-        case ApiEndpoint.ENEMY:
+        case CharacterType.ENEMY:
           return navigate('/enemies');
         default:
           return navigate('/');

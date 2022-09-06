@@ -1,6 +1,6 @@
 const ApiUrl = {
-  CHARACTER: '/api/v1/',
-  PARTY: '/api/v1/',
+  CHARACTERS: '/api/v1/characters/',
+  PARTY: '/api/v1',
 };
 
 export default ApiUrl;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function update(data, resourceType, id) {
+export async function update(url, data) {
   const config = {
     headers: {
       'Content-type': 'application/json',
@@ -8,7 +8,7 @@ export async function update(data, resourceType, id) {
   };
 
   try {
-    await axios.put(`/api/v1/${resourceType}/${id}`, data, config);
+    await axios.put(url, data, config);
   } catch (err) {
     console.log(err);
   }

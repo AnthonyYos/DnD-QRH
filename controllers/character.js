@@ -1,4 +1,5 @@
 const noCharacterError = { status: 404, message: 'Character not found.' };
+const characterTypeError = { status: 404, message: 'Type of character was not specified.' };
 const characterDAO = require('../service/characterDAO');
 
 //@desc Get all characters of a type
@@ -6,6 +7,7 @@ const characterDAO = require('../service/characterDAO');
 //@access Public
 const getCharacters = async (req, res, next) => {
   const { filter, query, characterType } = req.query || {};
+  if (!characterType) throw characterTypeError;
   const characters = await characterDAO.getCharacters({ filter, value: query }, characterType);
   return res.status(200).json({ success: true, data: characters });
 };

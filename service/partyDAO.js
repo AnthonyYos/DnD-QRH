@@ -1,4 +1,4 @@
-const Party = require('../models/party');
+const Party = require('../db/models/party');
 
 // Find party(ies) based on search value/filter or by type
 const getParties = async ({ filter = null, value = null } = {}, resourceType) => {
@@ -11,8 +11,12 @@ const getParties = async ({ filter = null, value = null } = {}, resourceType) =>
         query = { name: regex, type: `${resourceType}` };
         break;
       }
-      case 'character name': {
+      case 'has character': {
         query = { characters: regex, type: `${resourceType}` };
+        break;
+      }
+      case 'party size': {
+        query = { characters: { $size: value }, type: `${resourceType}` };
         break;
       }
       default: {
@@ -21,13 +25,13 @@ const getParties = async ({ filter = null, value = null } = {}, resourceType) =>
       }
     }
   }
-  const parties = await Party.find(query).populate('characters', 'name').sort({ name: 'asc' });
+  const parties = await Party.find(query).populate('characters').sort({ name: 'asc' });
   return parties;
 };
 
 // Find party based on id and populate
 const findParty = async id => {
-  const party = await Party.findById(id).populate('characters', 'name').sort({ name: 'asc' });
+  const party = await Party.findById(id).populate('characters').sort({ name: 'asc' });
   return party;
 };
 

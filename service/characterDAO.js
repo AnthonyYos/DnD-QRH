@@ -1,26 +1,26 @@
-const Character = require('../models/character');
+const Character = require('../db/models/character');
 
 // Find character(s) based on search value/filter or by type
-const getCharacters = async ({ filter = null, value = null } = {}, resourceType) => {
+const getCharacters = async ({ filter = null, value = null } = {}, characterType) => {
   let query;
-  if (!value) query = { type: `${resourceType}` };
+  if (!value) query = { type: `${characterType}` };
   else {
     let regex = new RegExp(value, 'i');
     switch (filter) {
       case 'name': {
-        query = { name: regex, type: `${resourceType}` };
+        query = { name: regex, type: `${characterType}` };
         break;
       }
       case 'race': {
-        query = { race: regex, type: `${resourceType}` };
+        query = { race: regex, type: `${characterType}` };
         break;
       }
       case 'alignment': {
-        query = { alignment: regex, type: `${resourceType}` };
+        query = { alignment: regex, type: `${characterType}` };
         break;
       }
       default: {
-        query = { type: `${resourceType}` };
+        query = { type: `${characterType}` };
         break;
       }
     }

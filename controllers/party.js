@@ -4,13 +4,10 @@ const partyDAO = require('../service/partyDAO');
 //@desc Get all party of a type
 //@route GET /api/v1/'resource type'/party
 //@access Public
-const getParties = resourceType => {
-  return async function (req, res, next) {
-    const { filter, query } = req.query || {};
-    const parties = await partyDAO.getParties({ filter, value: query }, resourceType);
-    return res.status(200).json({ success: true, data: parties });
-    // return res.status(200).json({ success: true, data: 'working' });
-  };
+const getParties = async (req, res, next) => {
+  const { filter, query, characterType } = req.query || {};
+  const parties = await partyDAO.getParties({ filter, value: query }, characterType);
+  return res.status(200).json({ success: true, data: parties });
 };
 
 //@desc Get Party by id

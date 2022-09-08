@@ -8,7 +8,11 @@ const characters = require('./routes/characters');
 
 const app = express();
 
-if (process.env.NODE_ENV !== 'production') app.use(morgan('dev'));
+app.use(
+  morgan('dev', {
+    skip: (req, res) => process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test',
+  })
+);
 app.use(express.json());
 app.use(cors());
 app.use(mongoSanitize());

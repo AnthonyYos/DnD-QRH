@@ -14,7 +14,7 @@ describe('Get /api/v1/characters', () => {
 
   after(async () => testDb.close());
 
-  it('returns w/ empty data object', async () => {
+  it('returns json.body.data is empty object', async () => {
     const res = await request(app).get(characterApiUrl).query({ characterType: 'player' });
     expect(res.body).to.contain.property('success');
     expect(res.body.success).to.equal(true);
@@ -29,7 +29,7 @@ describe('Get /api/v1/characters', () => {
     expect(res.body.data.length).to.equal(1);
   });
 
-  it('returns w/ empty object', async () => {
+  it('returns json.body.data is empty object', async () => {
     const res = await request(app).get(characterApiUrl).query({ characterType: 'enemy' });
     expect(res.body).to.contain.property('success');
     expect(res.body.success).to.equal(true);
@@ -53,11 +53,18 @@ describe('Get /api/v1/characters/:id', () => {
   after(async () => testDb.close());
 
   it('returns json w/ error property', async () => {
-    const fakeId = '111111111111';
+    const fakeId = 111111111111;
     const res = await request(app).get(characterIdApiUrl + fakeId);
     expect(res.body).to.contain.property('success');
     expect(res.body).to.contain.property('error');
     expect(res.body.success).to.equal(false);
+    expect(res.status).to.equal(404);
+  });
+
+  it('returns w/ 500 status code', async () => {
+    const fakeId = 111;
+    const res = await request(app).get(characterIdApiUrl + fakeId);
+    expect(res.status).to.equal(500);
   });
 
   it('returns json w/ character data', async () => {

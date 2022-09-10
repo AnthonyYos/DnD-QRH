@@ -8,7 +8,7 @@ const connect = async () => {
 };
 
 const close = () => {
-  return mongoose.connection.close();
+  return mongoose.disconnect();
 };
 
 module.exports = {

@@ -4,9 +4,10 @@ import useFetch from '../../hooks/useFetch';
 import SearchInput from '../Search/SearchInput';
 import SearchSelect from '../Search/SearchSelect';
 import { partySearchFilters } from '../../util/partySearchFilters';
+import ApiUrl from '../../util/apiUrl';
 
-export const PartyList = ({ resourceType }) => {
-  const apiUrl = `/api/v1/${resourceType}/party`;
+export const PartyList = ({ characterType }) => {
+  const apiUrl = `${ApiUrl.PARTY}?characterType=${characterType}`;
   const [url, setUrl] = useState(apiUrl);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchFilter, setSearchFilter] = useState('party name');
@@ -64,7 +65,7 @@ export const PartyList = ({ resourceType }) => {
           parties.map(party => (
             <div key={party._id}>
               party={party.name} <br />
-              resourceType={resourceType} <br />
+              characterType={characterType} <br />
               {party.characters.length > 0 &&
                 party.characters.map(c => <div key={c._id}>{c.name}</div>)}
             </div>

@@ -20,7 +20,7 @@ export default function UpdateCharacter({ characterType }) {
     isPending,
     error,
     setData: setCharacter,
-  } = useFetch(`${ApiUrl.CHARACTERS}${id}`);
+  } = useFetch(`${ApiUrl.CHARACTERS}/${id}`);
   const [updated, setUpdated] = useState();
 
   const btnLabel = characterType === CharacterType.PLAYER ? 'Update Player' : 'Update Enemy';

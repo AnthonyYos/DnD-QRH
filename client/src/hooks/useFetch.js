@@ -15,14 +15,13 @@ export default function useFetch(url) {
       try {
         const res = await axios.get(url, { signal: abortController.signal });
         setData(res.data.data);
-        setError(null);
       } catch (err) {
         if (err.name !== 'CanceledError') {
           setError(err.response.data.error);
-          setData(null);
         }
+      } finally {
+        setIsPending(false);
       }
-      setIsPending(false);
     };
 
     setTimeout(() => {

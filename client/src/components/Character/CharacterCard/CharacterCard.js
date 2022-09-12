@@ -10,7 +10,7 @@ import CharacterType from '../../../util/CharacterTypeURL';
 
 export default function CharacterCard({ character, resourceType, characterListState }) {
   const deleteHandler = () => {
-    const url = `${ApiUrl.CHARACTERS}${character._id}`;
+    const url = `${ApiUrl.CHARACTERS}/${character._id}`;
     const res = deleteResource(url);
     const newList = characterListState.characters.filter(c => c._id !== character._id);
     characterListState.setCharacters(newList);

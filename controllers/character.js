@@ -26,6 +26,7 @@ const findCharacter = async (req, res, next) => {
 //@access Public
 const addCharacter = async (req, res, next) => {
   const newCharacter = await characterDAO.createCharacter(req.body);
+  if (newCharacter.status) throw newCharacter;
   res.status(200).json({ success: true, data: newCharacter });
 };
 

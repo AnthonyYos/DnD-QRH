@@ -37,8 +37,15 @@ const findCharacter = async id => {
 
 // Create a new character using characterInfo(req.body)
 const createCharacter = async characterInfo => {
-  const newCharacter = await Character.create(characterInfo);
-  return newCharacter;
+  let newCharacter;
+  try {
+    newCharacter = await Character.create(characterInfo);
+    return newCharacter;
+  } catch (error) {
+    newCharacter = { status: 400, message: `${error._message}.` };
+  } finally {
+    return newCharacter;
+  }
 };
 
 // Find and update a character using characterInfo(req.body)

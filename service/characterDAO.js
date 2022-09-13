@@ -50,7 +50,7 @@ const createCharacter = async characterInfo => {
 
 // Find and update a character using characterInfo(req.body)
 const updateCharacter = async (id, characterInfo) => {
-  const updatedCharacter = Character.findByIdAndUpdate(id, characterInfo);
+  const updatedCharacter = await Character.findByIdAndUpdate(id, characterInfo, { new: true });
   return updatedCharacter;
 };
 

@@ -35,7 +35,7 @@ export default function UpdateCharacter({ characterType }) {
       modifiers: { str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod },
     };
     try {
-      const url = `${ApiUrl.CHARACTERS}${id}`;
+      const url = `${ApiUrl.CHARACTERS}/${id}`;
       update(url, updatedCharacter);
       setUpdated(true);
       setCharacter(updatedCharacter);

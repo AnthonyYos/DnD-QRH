@@ -7,7 +7,7 @@ const testDb = require('../../testDatabase');
 
 const characterApiUrl = '/api/v1/characters';
 
-describe('Post /api/v1/characters', () => {
+describe('POST /api/v1/characters', () => {
   before(async () => testDb.connect());
 
   afterEach(async () => testDb.dropCollections());

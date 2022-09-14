@@ -8,7 +8,7 @@ import Button from '../UI/Button';
 import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
 import ApiUrl from '../../util/apiUrl';
-import CharacterType from '../../util/CharacterTypeURL';
+import CharacterType from '../../util/CharacterType';
 
 export default function AddCharacter({ characterType }) {
   const navigate = useNavigate();

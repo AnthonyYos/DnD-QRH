@@ -9,7 +9,7 @@ import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
 import { update } from '../../util/functions/update';
 import LoadingSpinner from '../UI/LoadingSpinner';
-import CharacterType from '../../util/CharacterTypeURL';
+import CharacterType from '../../util/CharacterType';
 import ApiUrl from '../../util/apiUrl';
 
 export default function UpdateCharacter({ characterType }) {

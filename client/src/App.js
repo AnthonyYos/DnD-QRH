@@ -5,7 +5,7 @@ import AddCharacter from './components/Character/AddCharacter';
 import Navbar from './components/UI/Navbar';
 import UpdateCharacter from './components/Character/UpdateCharacter';
 import { PartyList } from './components/Party/PartyList';
-import CharacterType from './util/CharacterTypeURL';
+import CharacterType from './util/CharacterType';
 
 function App() {
   return (

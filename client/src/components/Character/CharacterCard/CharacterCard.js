@@ -6,9 +6,9 @@ import Button from '../../UI/Button';
 import { Link } from 'react-router-dom';
 import { deleteResource } from '../../../util/functions/delete';
 import ApiUrl from '../../../util/apiUrl';
-import CharacterType from '../../../util/CharacterTypeURL';
+import CharacterType from '../../../util/CharacterType';
 
-export default function CharacterCard({ character, resourceType, characterListState }) {
+export default function CharacterCard({ character, characterListState }) {
   const deleteHandler = () => {
     const url = `${ApiUrl.CHARACTERS}/${character._id}`;
     const res = deleteResource(url);

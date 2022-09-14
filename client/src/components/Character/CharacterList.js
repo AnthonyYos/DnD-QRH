@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import CharacterCard from './CharacterCard/CharacterCard';
 import useFetch from '../../hooks/useFetch';
-import CharacterType from '../../util/CharacterTypeURL';
+import CharacterType from '../../util/CharacterType';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import SearchInput from '../Search/SearchInput';
 import SearchSelect from '../Search/SearchSelect';
-import { characterSearchFilters } from '../../util/characterSearchFilters';
+import { characterSearchFilters } from '../../util/searchFilters/characterSearchFilters';
 import ApiUrl from '../../util/apiUrl';
 
 export const CharacterList = ({ characterType }) => {

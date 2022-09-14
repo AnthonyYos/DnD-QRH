@@ -1,5 +1,5 @@
 import React from 'react';
-import ApiEndpoint from '../../util/ResourceType';
+import CharacterType from '../../util/CharacterType';
 import Input from './Input';
 
 export default function StatInput({ register, name, label, className, characterType, ...rest }) {
@@ -8,10 +8,10 @@ export default function StatInput({ register, name, label, className, characterT
   const inputClassName = 'col-6';
 
   const minStat = 1;
-  const maxStat = characterType === ApiEndpoint.PLAYER ? 20 : 30;
+  const maxStat = characterType === CharacterType.PLAYER ? 20 : 30;
 
   const minModifier = -5;
-  const maxModifier = characterType === ApiEndpoint.PLAYER ? 5 : 10;
+  const maxModifier = characterType === CharacterType.PLAYER ? 5 : 10;
 
   return (
     <React.Fragment>

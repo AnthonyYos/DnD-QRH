@@ -9,7 +9,7 @@ const getCharacters = async (req, res, next) => {
   const { filter, query, characterType } = req.query || {};
   if (!characterType) throw characterTypeError;
   const characters = await characterDAO.getCharacters({ filter, value: query }, characterType);
-  return res.status(200).json({ success: true, data: characters });
+  return res.status(200).json({ data: characters });
 };
 
 //@desc Get character by id
@@ -18,7 +18,7 @@ const getCharacters = async (req, res, next) => {
 const findCharacter = async (req, res, next) => {
   const character = await characterDAO.findCharacter(req.params.id);
   if (!character) throw noCharacterError;
-  return res.status(200).json({ success: true, data: character });
+  return res.status(200).json({ data: character });
 };
 
 //@desc Post character
@@ -27,7 +27,7 @@ const findCharacter = async (req, res, next) => {
 const addCharacter = async (req, res, next) => {
   const newCharacter = await characterDAO.createCharacter(req.body);
   if (newCharacter.status) throw newCharacter;
-  res.status(200).json({ success: true, data: newCharacter });
+  res.status(200).json({ data: newCharacter });
 };
 
 //@desc Put find/update character by id
@@ -36,7 +36,7 @@ const addCharacter = async (req, res, next) => {
 const updateCharacter = async (req, res, next) => {
   const character = await characterDAO.updateCharacter(req.params.id, req.body);
   if (!character) throw noCharacterError;
-  return res.status(200).json({ success: true, data: character });
+  return res.status(200).json({ data: character });
 };
 
 //@desc Delete find/delete character by id
@@ -45,7 +45,7 @@ const updateCharacter = async (req, res, next) => {
 const deleteCharacter = async (req, res, next) => {
   const character = await characterDAO.deleteCharacter(req.params.id);
   if (!character) throw noCharacterError;
-  return res.status(200).json({ success: true, data: {} });
+  return res.status(200).json({ data: {} });
 };
 
 module.exports = {

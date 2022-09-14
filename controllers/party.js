@@ -7,7 +7,7 @@ const partyDAO = require('../service/partyDAO');
 const getParties = async (req, res, next) => {
   const { filter, query, characterType } = req.query || {};
   const parties = await partyDAO.getParties({ filter, value: query }, characterType);
-  return res.status(200).json({ success: true, data: parties });
+  return res.status(200).json({ data: parties });
 };
 
 //@desc Get Party by id
@@ -16,7 +16,7 @@ const getParties = async (req, res, next) => {
 const findParty = async (req, res, next) => {
   const party = await partyDAO.findParty(req.params.id);
   if (!party) throw noPartyError;
-  return res.status(200).json({ success: true, data: party });
+  return res.status(200).json({ data: party });
 };
 
 //@desc Post Party
@@ -24,7 +24,7 @@ const findParty = async (req, res, next) => {
 //@access Public
 const addParty = async (req, res, next) => {
   const newParty = await partyDAO.createParty(req.body);
-  res.status(200).json({ success: true, data: newParty });
+  res.status(200).json({ data: newParty });
 };
 
 //@desc Put find/update Party by id
@@ -33,7 +33,7 @@ const addParty = async (req, res, next) => {
 const updateParty = async (req, res, next) => {
   const updatedParty = await partyDAO.updateParty(req.params.id, req.body);
   if (!updatedParty) throw noPartyError;
-  return res.status(200).json({ success: true, data: updatedParty });
+  return res.status(200).json({ data: updatedParty });
 };
 
 //@desc Delete find/delete Party by id
@@ -42,7 +42,7 @@ const updateParty = async (req, res, next) => {
 const deleteParty = async (req, res, next) => {
   const deletedParty = await partyDAO.deleteParty(req.params.id);
   if (!deletedParty) throw noPartyError;
-  return res.status(200).json({ success: true, data: {} });
+  return res.status(200).json({ data: {} });
 };
 
 module.exports = { getParties, findParty, addParty, updateParty, deleteParty };

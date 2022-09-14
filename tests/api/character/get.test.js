@@ -51,19 +51,20 @@ describe('Get /api/v1/characters/:id', () => {
 
   after(async () => testDb.close());
 
-  it('returns json w/ error property', async () => {
-    const fakeId = 111111111111;
-    const res = await request(app).get(characterApiUrl + fakeId);
+  it('Incorrect id good format, returns json w/ error property', async () => {
+    const incorrectID = 111111111111;
+    const res = await request(app).get(characterApiUrl + incorrectID);
     expect(res.body).to.contain.property('success');
     expect(res.body).to.contain.property('error');
     expect(res.body.success).to.equal(false);
     expect(res.status).to.equal(404);
   });
 
-  it('returns w/ 500 status code', async () => {
-    const fakeId = 111;
-    const res = await request(app).get(characterApiUrl + fakeId);
-    expect(res.status).to.equal(500);
+  it('Incorrect id wrong format, returns w/ 500 status code', async () => {
+    const incorrectID = 111;
+    const res = await request(app).get(characterApiUrl + incorrectID);
+    expect(res.status).to.equal(404);
+    expect(res.body).to.contain.property('error');
   });
 
   it('returns json w/ character data', async () => {

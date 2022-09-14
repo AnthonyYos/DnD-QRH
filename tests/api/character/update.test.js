@@ -5,6 +5,7 @@ const app = require('../../../app');
 const testDb = require('../../testDatabase');
 
 const characterApiUrl = '/api/v1/characters/';
+const updateData = { name: 'Updated Name Test' };
 
 describe('PUT /api/v1/characters/:id', () => {
   before(async () => testDb.connect());
@@ -17,7 +18,7 @@ describe('PUT /api/v1/characters/:id', () => {
     const character = await testDb.initializeCharacter('player');
     const res = await request(app)
       .put(characterApiUrl + character.id)
-      .send({ name: 'Updated Name Test' });
+      .send(updateData);
     expect(res.body.success).to.equal(true);
     expect(res.body.data.name).to.not.equal(character.name);
   });
@@ -53,14 +54,25 @@ describe('PUT /api/v1/characters/:id', () => {
     const { _id: id } = postResponse.body.data;
     const res = await request(app)
       .put(characterApiUrl + id)
-      .send({ name: 'Updated Name Test' });
+      .send(updateData);
     expect(res.body.success).to.equal(true);
     expect(res.body.data.name).to.not.equal(postResponse.name);
   });
 
-  it('Fake id, returns status code 404 & json w/ error property', async () => {
-    const fakeId = 111111111111;
-    const res = await request(app).put(characterApiUrl + fakeId);
+  it('Incorrect id good format, returns status code 404 & json w/ error property', async () => {
+    const incorrectID = 111111111111;
+    const res = await request(app)
+      .put(characterApiUrl + incorrectID)
+      .send(updateData);
+    expect(res.status).to.equal(404);
+    expect(res.body).to.contain.property('error');
+  });
+
+  it('Incorrect id wrong format, returns status code 500 & json w/ error property', async () => {
+    const incorrectID = 11;
+    const res = await request(app)
+      .put(characterApiUrl + incorrectID)
+      .send(updateData);
     expect(res.status).to.equal(404);
     expect(res.body).to.contain.property('error');
   });

@@ -45,7 +45,6 @@ describe('POST /api/v1/characters', () => {
     const id = res.body.data._id;
     const character = await request(app).get(`${characterApiUrl}/${id}`);
     expect(character.body.data.name).to.equal(res.body.data.name);
-    expect(res.body.success).to.equal(true);
   });
 
   it('Throws ValidationError using incomplete data ', async () => {

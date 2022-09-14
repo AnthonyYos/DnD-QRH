@@ -16,8 +16,6 @@ describe('DELETE /api/v1/characters/:id', () => {
   it('Successfully deletes character, returns json w/ empty object in data field', async () => {
     const character = await testDb.initializeCharacter('player');
     const res = await request(app).delete(characterApiUrl + character.id);
-    expect(res.body).to.contain.property('success');
-    expect(res.body.success).to.equal(true);
     expect(Object.keys(res.body.data).length).to.equal(0);
   });
 
@@ -51,8 +49,6 @@ describe('DELETE /api/v1/characters/:id', () => {
       });
     const { _id: id } = postResponse.body.data;
     const res = await request(app).delete(characterApiUrl + id);
-    expect(res.body).to.contain.property('success');
-    expect(res.body.success).to.equal(true);
     expect(Object.keys(res.body.data).length).to.equal(0);
   });
 

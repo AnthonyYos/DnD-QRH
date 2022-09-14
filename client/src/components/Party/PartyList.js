@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import useFetch from '../../hooks/useFetch';
 import SearchInput from '../Search/SearchInput';
 import SearchSelect from '../Search/SearchSelect';
-import { partySearchFilters } from '../../util/partySearchFilters';
+import { partySearchFilters } from '../../util/searchFilters/partySearchFilters';
 import ApiUrl from '../../util/apiUrl';
 
 export const PartyList = ({ characterType }) => {
@@ -20,7 +19,7 @@ export const PartyList = ({ characterType }) => {
   // Sets a new url to be useed by useFetch when searchTerm/searchFilter changes
   useEffect(() => {
     const searchLookup = setTimeout(() => {
-      if (searchTerm) setUrl(apiUrl + `?filter=${searchFilter}&query=${searchTerm}`);
+      if (searchTerm) setUrl(apiUrl + `&filter=${searchFilter}&query=${searchTerm}`);
       else setUrl(apiUrl);
     }, 500);
     return () => {

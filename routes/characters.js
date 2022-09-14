@@ -10,12 +10,12 @@ router
   .post(wrapAsync(characterController.addCharacter));
 
 router
-  .route('/party')
+  .route('/parties')
   .get(wrapAsync(partyController.getParties))
   .post(wrapAsync(partyController.addParty));
 
 router
-  .route('/party/:id')
+  .route('/parties/:id')
   .get(wrapAsync(partyController.findParty))
   .put(wrapAsync(partyController.updateParty))
   .delete(wrapAsync(partyController.deleteParty));

@@ -1,27 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import useFetch from '../../hooks/useFetch';
 import Form from '../Form/Form';
 import Input from '../Form/Input';
 import Select from '../Form/Select';
 import Button from '../UI/Button';
 import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
-import { update } from '../../util/functions/update';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import CharacterType from '../../util/CharacterType';
 import ApiUrl from '../../util/apiUrl';
+import useAxiosFunction from '../../hooks/useAxiosFunction';
+import axios from '../../util/apis/characters';
 
 export default function UpdateCharacter({ characterType }) {
   const navigate = useNavigate();
   const { id } = useParams();
-  const {
-    data: character,
-    isPending,
-    error,
-    setData: setCharacter,
-  } = useFetch(`${ApiUrl.CHARACTERS}/${id}`);
   const [updated, setUpdated] = useState();
+
+  const {
+    response: character,
+    loading,
+    error,
+    setResponse: setCharacter,
+    axiosFetch,
+  } = useAxiosFunction();
+
+  useEffect(() => {
+    const getData = () => {
+      axiosFetch({
+        axiosInstance: axios,
+        method: 'get',
+        url: `/${id}`,
+      });
+    };
+    getData();
+  }, []);
 
   const btnLabel = characterType === CharacterType.PLAYER ? 'Update Player' : 'Update Enemy';
 
@@ -29,16 +42,22 @@ export default function UpdateCharacter({ characterType }) {
     const { str, dex, con, int, wis, cha, ...partialData } = e;
     const { str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod, ...rest } = partialData;
 
-    const updatedCharacter = {
+    const updateData = {
       ...rest,
       stats: { str, dex, con, int, wis, cha },
       modifiers: { str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod },
     };
     try {
-      const url = `${ApiUrl.CHARACTERS}/${id}`;
-      update(url, updatedCharacter);
+      axiosFetch({
+        axiosInstance: axios,
+        method: 'put',
+        url: `/${id}`,
+        requestConfig: {
+          data: updateData,
+        },
+      });
       setUpdated(true);
-      setCharacter(updatedCharacter);
+      setCharacter(updateData);
       switch (characterType) {
         case CharacterType.PLAYER:
           return navigate(`/players/${id}`);
@@ -55,7 +74,7 @@ export default function UpdateCharacter({ characterType }) {
 
   return (
     <React.Fragment>
-      {isPending && <LoadingSpinner />}
+      {loading && <LoadingSpinner />}
       {error && <div>{error}</div>}
       {character && (
         <section className='row'>

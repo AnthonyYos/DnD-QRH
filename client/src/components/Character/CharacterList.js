@@ -1,35 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import CharacterCard from './CharacterCard/CharacterCard';
-import useFetch from '../../hooks/useFetch';
 import CharacterType from '../../util/CharacterType';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import SearchInput from '../Search/SearchInput';
 import SearchSelect from '../Search/SearchSelect';
 import { characterSearchFilters } from '../../util/searchFilters/characterSearchFilters';
-import ApiUrl from '../../util/apiUrl';
+import axios from '../../util/apis/characters';
+import useAxiosFunction from '../../hooks/useAxiosFunction';
 
 export const CharacterList = ({ characterType }) => {
-  const apiUrl = `${ApiUrl.CHARACTERS}?characterType=${characterType}`;
-  const [url, setUrl] = useState(apiUrl);
+  const urlQuery = `?characterType=${characterType}`;
+  const [url, setUrl] = useState(urlQuery);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchFilter, setSearchFilter] = useState('name');
+  const {
+    response: characters,
+    loading,
+    error,
+    setResponse: setCharacters,
+    axiosFetch,
+  } = useAxiosFunction();
 
-  const { data: characters, isPending, error, setData: setCharacters } = useFetch(url);
+  useEffect(() => {
+    const getData = setTimeout(() => {
+      axiosFetch({
+        axiosInstance: axios,
+        method: 'get',
+        url: url,
+      });
+    }, 500);
+    return () => clearTimeout(getData);
+  }, [url]);
 
   // Resets search field when switching between CharacterList for players & enemies
-  useEffect(() => setSearchTerm(''), [apiUrl]);
+  useEffect(() => setSearchTerm(''), [characterType]);
 
-  // Sets a new url to be useed by useFetch when searchTerm/searchFilter changes
+  // Sets the query url whenever searchTerm/searchFilter changes
   useEffect(() => {
-    const searchLookup = setTimeout(() => {
-      if (searchTerm) setUrl(apiUrl + `&filter=${searchFilter}&query=${searchTerm}`);
-      else setUrl(apiUrl);
-    }, 500);
-    return () => {
-      clearTimeout(searchLookup);
-    };
-  }, [searchTerm, searchFilter, apiUrl]);
+    if (searchTerm) setUrl(urlQuery + `&filter=${searchFilter}&query=${searchTerm}`);
+    else setUrl(urlQuery);
+  }, [searchTerm, searchFilter, urlQuery]);
 
   const handleSearchTerm = e => {
     setSearchTerm(e.target.value);
@@ -68,7 +79,7 @@ export const CharacterList = ({ characterType }) => {
       </section>
       <section className='row m-3'>
         {/* Display loading spinner, error, or button; when a request is made for data, an error occurs, or receive a response where there is no data*/}
-        {isPending && <LoadingSpinner />}
+        {loading && <LoadingSpinner />}
         {error && <div>{error}</div>}
         {characters && !characters.length && (
           <React.Fragment>

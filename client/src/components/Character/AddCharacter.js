@@ -1,17 +1,28 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { add } from '../../util/functions/add';
 import Form from '../Form/Form';
 import Input from '../Form/Input';
 import Select from '../Form/Select';
 import Button from '../UI/Button';
 import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
-import ApiUrl from '../../util/apiUrl';
 import CharacterType from '../../util/CharacterType';
+import useAxiosFunction from '../../hooks/useAxiosFunction';
+import axios from '../../util/apis/characters';
 
 export default function AddCharacter({ characterType }) {
   const navigate = useNavigate();
+  const { error, axiosFetch } = useAxiosFunction();
+
+  const addCharacter = newCharacter =>
+    axiosFetch({
+      axiosInstance: axios,
+      method: 'post',
+      url: `/`,
+      requestConfig: {
+        data: newCharacter,
+      },
+    });
 
   const btnLabel = characterType === CharacterType.PLAYER ? 'Add Player' : 'Add Enemy';
 
@@ -27,9 +38,8 @@ export default function AddCharacter({ characterType }) {
     };
 
     try {
-      console.log(newCharacter);
-      const url = `${ApiUrl.CHARACTERS}`;
-      add(newCharacter, url);
+      addCharacter(newCharacter);
+      if (error) throw error;
       switch (characterType) {
         case CharacterType.PLAYER:
           return navigate('/players');
@@ -39,7 +49,7 @@ export default function AddCharacter({ characterType }) {
           return navigate('/');
       }
     } catch (error) {
-      console.log(error, 'errrororor');
+      console.log(error);
     }
   };
 

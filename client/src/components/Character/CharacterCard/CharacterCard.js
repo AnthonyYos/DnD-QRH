@@ -1,20 +1,32 @@
 import React from 'react';
-
 import CharacterHeader from './CharacterHeader';
 import CharacterStats from './CharacterStats';
 import Button from '../../UI/Button';
 import { Link } from 'react-router-dom';
-import { deleteResource } from '../../../util/functions/delete';
 import ApiUrl from '../../../util/apiUrl';
 import CharacterType from '../../../util/CharacterType';
+import axios from '../../../util/apis/characters';
+import useAxiosFunction from '../../../hooks/useAxiosFunction';
 
 export default function CharacterCard({ character, characterListState }) {
+  const { error, axiosFetch } = useAxiosFunction();
+
+  const deleteCharacter = id =>
+    axiosFetch({
+      axiosInstance: axios,
+      method: 'delete',
+      url: `/${id}`,
+    });
+
   const deleteHandler = () => {
-    const url = `${ApiUrl.CHARACTERS}/${character._id}`;
-    const res = deleteResource(url);
-    const newList = characterListState.characters.filter(c => c._id !== character._id);
-    characterListState.setCharacters(newList);
-    return res;
+    try {
+      deleteCharacter(character._id);
+      if (error) throw error;
+      const newList = characterListState.characters.filter(c => c._id !== character._id);
+      characterListState.setCharacters(newList);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const updateLink =

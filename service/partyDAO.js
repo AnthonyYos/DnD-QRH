@@ -43,7 +43,7 @@ const createParty = async partyInfo => {
 
 // Find party by id and update using partyInfo
 const updateParty = async (id, partyInfo) => {
-  const updatedParty = await Party.findByIdAndUpdate(id, partyInfo);
+  const updatedParty = await Party.findByIdAndUpdate(id, partyInfo, { new: true });
   return updatedParty;
 };
 

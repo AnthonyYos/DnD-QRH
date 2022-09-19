@@ -4,8 +4,7 @@ const assert = require('chai').assert;
 const request = require('supertest');
 const app = require('../../../app');
 const testDb = require('../../testDatabase');
-
-const characterApiUrl = '/api/v1/characters';
+const { characterApiUrl } = require('../../apiUrls');
 
 describe('POST /api/v1/characters', () => {
   before(async () => testDb.connect());

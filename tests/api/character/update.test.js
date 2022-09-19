@@ -3,8 +3,7 @@ const expect = require('chai').expect;
 const request = require('supertest');
 const app = require('../../../app');
 const testDb = require('../../testDatabase');
-
-const characterApiUrl = '/api/v1/characters/';
+const { characterApiUrl } = require('../../apiUrls');
 const updateData = { name: 'Updated Name Test' };
 
 describe('PUT /api/v1/characters/:id', () => {

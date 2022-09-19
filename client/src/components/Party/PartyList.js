@@ -5,8 +5,8 @@ import SearchSelect from '../Search/SearchSelect';
 import { partySearchFilters } from '../../util/searchFilters/partySearchFilters';
 import ApiUrl from '../../util/apiUrl';
 
-export const PartyList = ({ characterType }) => {
-  const apiUrl = `${ApiUrl.PARTY}?characterType=${characterType}`;
+export const PartyList = ({ partyType }) => {
+  const apiUrl = `${ApiUrl.PARTY}?partyType=${partyType}`;
   const [url, setUrl] = useState(apiUrl);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchFilter, setSearchFilter] = useState('party name');
@@ -64,7 +64,7 @@ export const PartyList = ({ characterType }) => {
           parties.map(party => (
             <div key={party._id}>
               party={party.name} <br />
-              characterType={characterType} <br />
+              partyType={partyType} <br />
               {party.characters.length > 0 &&
                 party.characters.map(c => <div key={c._id}>{c.name}</div>)}
             </div>

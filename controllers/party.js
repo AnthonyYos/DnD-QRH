@@ -1,12 +1,14 @@
 const noPartyError = { status: 404, message: 'Party not found.' };
+const partyTypeError = { status: 404, message: 'Type of party was not specified.' };
 const partyDAO = require('../service/partyDAO');
 
 //@desc Get all party of a type
 //@route GET /api/v1/'resource type'/party
 //@access Public
 const getParties = async (req, res, next) => {
-  const { filter, query, characterType } = req.query || {};
-  const parties = await partyDAO.getParties({ filter, value: query }, characterType);
+  const { filter, query, partyType } = req.query || {};
+  if (!partyType) throw partyTypeError;
+  const parties = await partyDAO.getParties({ filter, value: query }, partyType);
   return res.status(200).json({ data: parties });
 };
 

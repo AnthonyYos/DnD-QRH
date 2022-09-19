@@ -1,26 +1,26 @@
 const Party = require('../db/models/party');
 
 // Find party(ies) based on search value/filter or by type
-const getParties = async ({ filter = null, value = null } = {}, resourceType) => {
+const getParties = async ({ filter = null, value = null } = {}, partyType) => {
   let query;
-  if (!value) query = { type: `${resourceType}` };
+  if (!value) query = { type: `${partyType}` };
   else {
     let regex = new RegExp(value, 'i');
     switch (filter) {
       case 'party name': {
-        query = { name: regex, type: `${resourceType}` };
+        query = { name: regex, type: `${partyType}` };
         break;
       }
       case 'has character': {
-        query = { characters: regex, type: `${resourceType}` };
+        query = { characters: regex, type: `${partyType}` };
         break;
       }
       case 'party size': {
-        query = { characters: { $size: value }, type: `${resourceType}` };
+        query = { characters: { $size: value }, type: `${partyType}` };
         break;
       }
       default: {
-        query = { type: `${resourceType}` };
+        query = { type: `${partyType}` };
         break;
       }
     }

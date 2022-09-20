@@ -40,7 +40,6 @@ const createCharacter = async characterInfo => {
   let newCharacter;
   try {
     newCharacter = await Character.create(characterInfo);
-    return newCharacter;
   } catch (error) {
     newCharacter = { status: 400, message: `${error._message}.` };
   } finally {

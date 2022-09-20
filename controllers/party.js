@@ -26,6 +26,7 @@ const findParty = async (req, res, next) => {
 //@access Public
 const addParty = async (req, res, next) => {
   const newParty = await partyDAO.createParty(req.body);
+  if (newParty.status) throw ({ status, message } = newParty);
   res.status(200).json({ data: newParty });
 };
 

@@ -37,8 +37,14 @@ const findParty = async id => {
 
 // Create a new party using partyInfo(req.body)
 const createParty = async partyInfo => {
-  const newParty = await Party.create(partyInfo);
-  return newParty;
+  let newParty;
+  try {
+    newParty = await Party.create(partyInfo);
+  } catch (error) {
+    newParty = { status: 400, message: `${error._message}.` };
+  } finally {
+    return newParty;
+  }
 };
 
 // Find party by id and update using partyInfo

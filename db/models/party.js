@@ -1,23 +1,20 @@
 const mongoose = require('mongoose');
 
-const partySchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    type: {
-      type: String,
-      required: true,
-    },
-    characters: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Character',
-      },
-    ],
+const partySchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
   },
-  { collation: { locale: 'en_US', strength: 2 } }
-);
+  type: {
+    type: String,
+    required: true,
+  },
+  characters: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Character',
+    },
+  ],
+});
 
 module.exports = mongoose.model('Party', partySchema);

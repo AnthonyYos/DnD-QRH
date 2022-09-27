@@ -5,5 +5,5 @@ module.exports = function errorHandler(err, req, res, next) {
   // status defaults to 500 if status is outside the 4xx/5xx range
   const { status } = err;
   if (!err.message) err.message = 'Something went bad';
-  res.status(status).json({ success: false, error: err.message });
+  res.status(status).json({ error: err.message });
 };

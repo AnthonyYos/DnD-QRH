@@ -4,28 +4,42 @@ import SearchInput from '../Search/SearchInput';
 import SearchSelect from '../Search/SearchSelect';
 import { partySearchFilters } from '../../util/searchFilters/partySearchFilters';
 import ApiUrl from '../../util/apiUrl';
+import useAxiosFunction from '../../hooks/useAxiosFunction';
+import axios from '../../util/apis/parties';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 export const PartyList = ({ partyType }) => {
-  const apiUrl = `${ApiUrl.PARTY}?partyType=${partyType}`;
-  const [url, setUrl] = useState(apiUrl);
+  const urlQuery = `?partyType=${partyType}`;
+  const [url, setUrl] = useState(urlQuery);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchFilter, setSearchFilter] = useState('party name');
+  const [searchFilter, setSearchFilter] = useState('name');
+  const {
+    response: parties,
+    loading,
+    error,
+    setResponse: setParties,
+    axiosFetch,
+  } = useAxiosFunction();
 
-  const { data: parties, isPending, error, setData: setParties } = useFetch(url);
+  useEffect(() => {
+    const getData = setTimeout(() => {
+      axiosFetch({
+        axiosInstance: axios,
+        method: 'get',
+        url: url,
+      });
+    }, 500);
+    return () => clearTimeout(getData);
+  }, [url]);
 
   // Resets search field when switching between CharacterList for players & enemies
-  useEffect(() => setSearchTerm(''), [apiUrl]);
+  useEffect(() => setSearchTerm(''), [partyType]);
 
-  // Sets a new url to be useed by useFetch when searchTerm/searchFilter changes
+  // Sets the query url whenever searchTerm/searchFilter changes
   useEffect(() => {
-    const searchLookup = setTimeout(() => {
-      if (searchTerm) setUrl(apiUrl + `&filter=${searchFilter}&query=${searchTerm}`);
-      else setUrl(apiUrl);
-    }, 500);
-    return () => {
-      clearTimeout(searchLookup);
-    };
-  }, [searchTerm, searchFilter, apiUrl]);
+    if (searchTerm) setUrl(urlQuery + `&filter=${searchFilter}&query=${searchTerm}`);
+    else setUrl(urlQuery);
+  }, [searchTerm, searchFilter, urlQuery]);
 
   const handleSearchTerm = e => {
     setSearchTerm(e.target.value);
@@ -59,14 +73,18 @@ export const PartyList = ({ partyType }) => {
       </section>
 
       <section className='row m-3'>
+        {loading && <LoadingSpinner />}
+        {error && <div>{error}</div>}
         {parties &&
           parties.length > 0 &&
           parties.map(party => (
             <div key={party._id}>
               party={party.name} <br />
               partyType={partyType} <br />
+              Party members:
               {party.characters.length > 0 &&
                 party.characters.map(c => <div key={c._id}>{c.name}</div>)}
+              <br />
             </div>
           ))}
         {/* {parties &&

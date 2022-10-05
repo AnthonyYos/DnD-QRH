@@ -18,7 +18,7 @@ function App() {
           element={<AddCharacter characterType={CharacterType.ENEMY} />}
         />
         <Route path='/enemies' element={<CharacterList characterType={CharacterType.ENEMY} />} />
-        <Route path='/enemies/party' element={<PartyList partyType={CharacterType.ENEMY} />} />
+        <Route path='/parties/enemies' element={<PartyList partyType={CharacterType.ENEMY} />} />
         <Route
           path='/enemies/:id'
           element={<UpdateCharacter characterType={CharacterType.ENEMY} />}
@@ -28,7 +28,7 @@ function App() {
           element={<AddCharacter characterType={CharacterType.PLAYER} />}
         />
         <Route path='/players' element={<CharacterList characterType={CharacterType.PLAYER} />} />
-        <Route path='/players/party' element={<PartyList partyType={CharacterType.PLAYER} />} />
+        <Route path='parties/players' element={<PartyList partyType={CharacterType.PLAYER} />} />
         <Route
           path='/players/:id'
           element={<UpdateCharacter characterType={CharacterType.PLAYER} />}

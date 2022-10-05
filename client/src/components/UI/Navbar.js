@@ -26,7 +26,7 @@ export default function Navbar() {
             <Link className='nav-link' to='/players'>
               Players
             </Link>
-            <Link className='nav-link' to='/players/party'>
+            <Link className='nav-link' to='/parties/players'>
               Player Parties
             </Link>
             <Link className='nav-link' to='/create/enemies'>
@@ -35,7 +35,7 @@ export default function Navbar() {
             <Link className='nav-link' to='/enemies'>
               Enemies
             </Link>
-            <Link className='nav-link' to='/enemies/party'>
+            <Link className='nav-link' to='/parties/enemies'>
               Enemy Parties
             </Link>
           </div>

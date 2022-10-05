@@ -8,6 +8,7 @@ import SearchSelect from '../Search/SearchSelect';
 import { characterSearchFilters } from '../../util/searchFilters/characterSearchFilters';
 import axios from '../../util/apis/characters';
 import useAxiosFunction from '../../hooks/useAxiosFunction';
+import SearchBar from '../Search/SearchBar';
 
 export const CharacterList = ({ characterType }) => {
   const urlQuery = `?characterType=${characterType}`;
@@ -59,21 +60,12 @@ export const CharacterList = ({ characterType }) => {
       {/* Search fields */}
       <section className='row mt-3'>
         <div className='offset-4'>
-          <SearchSelect
-            name='filter'
-            label='Filter'
-            className='m-2'
-            options={characterSearchFilters}
-            onChange={handleSearchFilter}
-          />
-          <SearchInput
-            name='search'
-            type='text'
-            label='Search'
-            placeholder={`Search by ${searchFilter}...`}
-            value={searchTerm}
-            className='m-2'
-            onChange={handleSearchTerm}
+          <SearchBar
+            selectOptions={characterSearchFilters}
+            selectFilterHandler={handleSearchFilter}
+            searchFilter={searchFilter}
+            searchTermValue={searchTerm}
+            searchTermHandler={handleSearchTerm}
           />
         </div>
       </section>

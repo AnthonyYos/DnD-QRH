@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import useFetch from '../../hooks/useFetch';
 import SearchInput from '../Search/SearchInput';
 import SearchSelect from '../Search/SearchSelect';
 import { partySearchFilters } from '../../util/searchFilters/partySearchFilters';
-import ApiUrl from '../../util/apiUrl';
 import useAxiosFunction from '../../hooks/useAxiosFunction';
 import axios from '../../util/apis/parties';
 import LoadingSpinner from '../UI/LoadingSpinner';

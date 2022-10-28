@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const wrapAsync = require('../middleware/wrapAsync');
 const characterController = require('../controllers/character');
-const partyController = require('../controllers/party');
 
 router
   .route('/')

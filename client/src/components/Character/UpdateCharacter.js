@@ -10,7 +10,7 @@ import LoadingSpinner from '../UI/LoadingSpinner';
 import CharacterType from '../../util/CharacterType';
 import ApiUrl from '../../util/apiUrl';
 import useAxiosFunction from '../../hooks/useAxiosFunction';
-import axios from '../../util/apis/characters';
+import characterApiAxios from '../../util/apis/characters';
 
 export default function UpdateCharacter({ characterType }) {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function UpdateCharacter({ characterType }) {
   useEffect(() => {
     const getData = () => {
       axiosFetch({
-        axiosInstance: axios,
+        axiosInstance: characterApiAxios,
         method: 'get',
         url: `/${id}`,
       });
@@ -49,7 +49,7 @@ export default function UpdateCharacter({ characterType }) {
     };
     try {
       axiosFetch({
-        axiosInstance: axios,
+        axiosInstance: characterApiAxios,
         method: 'put',
         url: `/${id}`,
         requestConfig: {

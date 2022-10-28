@@ -3,10 +3,8 @@ import CharacterCard from './CharacterCard/CharacterCard';
 import CharacterType from '../../util/CharacterType';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../UI/LoadingSpinner';
-import SearchInput from '../Search/SearchInput';
-import SearchSelect from '../Search/SearchSelect';
 import { characterSearchFilters } from '../../util/searchFilters/characterSearchFilters';
-import axios from '../../util/apis/characters';
+import characterApiAxios from '../../util/apis/characters';
 import useAxiosFunction from '../../hooks/useAxiosFunction';
 import SearchBar from '../Search/SearchBar';
 
@@ -26,7 +24,7 @@ export const CharacterList = ({ characterType }) => {
   useEffect(() => {
     const getData = setTimeout(() => {
       axiosFetch({
-        axiosInstance: axios,
+        axiosInstance: characterApiAxios,
         method: 'get',
         url: url,
       });

@@ -3,7 +3,7 @@ import SearchInput from '../Search/SearchInput';
 import SearchSelect from '../Search/SearchSelect';
 import { partySearchFilters } from '../../util/searchFilters/partySearchFilters';
 import useAxiosFunction from '../../hooks/useAxiosFunction';
-import axios from '../../util/apis/parties';
+import partyApiAxios from '../../util/apis/parties';
 import LoadingSpinner from '../UI/LoadingSpinner';
 
 export const PartyList = ({ partyType }) => {
@@ -22,7 +22,7 @@ export const PartyList = ({ partyType }) => {
   useEffect(() => {
     const getData = setTimeout(() => {
       axiosFetch({
-        axiosInstance: axios,
+        axiosInstance: partyApiAxios,
         method: 'get',
         url: url,
       });

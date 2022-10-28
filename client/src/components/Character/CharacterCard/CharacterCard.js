@@ -3,7 +3,6 @@ import CharacterHeader from './CharacterHeader';
 import CharacterStats from './CharacterStats';
 import Button from '../../UI/Button';
 import { Link } from 'react-router-dom';
-import ApiUrl from '../../../util/apiUrl';
 import CharacterType from '../../../util/CharacterType';
 import axios from '../../../util/apis/characters';
 import useAxiosFunction from '../../../hooks/useAxiosFunction';

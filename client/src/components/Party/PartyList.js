@@ -5,12 +5,13 @@ import { partySearchFilters } from '../../util/searchFilters/partySearchFilters'
 import useAxiosFunction from '../../hooks/useAxiosFunction';
 import partyApiAxios from '../../util/apis/parties';
 import LoadingSpinner from '../UI/LoadingSpinner';
+import SearchBar from '../Search/SearchBar';
 
 export const PartyList = ({ partyType }) => {
   const urlQuery = `?partyType=${partyType}`;
   const [url, setUrl] = useState(urlQuery);
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchFilter, setSearchFilter] = useState('name');
+  const [searchFilter, setSearchFilter] = useState('party name');
   const {
     response: parties,
     loading,
@@ -50,8 +51,15 @@ export const PartyList = ({ partyType }) => {
   return (
     <React.Fragment>
       <section className='row mt-3'>
-        <div className='offset-4'>
-          <SearchSelect
+        <div className='offset-5 col-sm-4'>
+          <SearchBar
+            selectOptions={partySearchFilters}
+            selectFilterHandler={handleSearchFilter}
+            searchFilter={searchFilter}
+            searchTermValue={searchTerm}
+            searchTermHandler={handleSearchTerm}
+          />
+          {/* <SearchSelect
             name='filter'
             label='Filter'
             className='m-2'
@@ -66,7 +74,7 @@ export const PartyList = ({ partyType }) => {
             value={searchTerm}
             className='m-2'
             onChange={handleSearchTerm}
-          />
+          /> */}
         </div>
       </section>
 
@@ -85,15 +93,6 @@ export const PartyList = ({ partyType }) => {
               <br />
             </div>
           ))}
-        {/* {parties &&
-        parties.map(party => (
-          <PartyCard
-            key={party._id}
-            party={party}
-            resourceType={resourceType}
-            partyListState={{ parties, setParties }}
-          />
-        ))} */}
       </section>
     </React.Fragment>
   );

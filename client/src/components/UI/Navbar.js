@@ -26,18 +26,18 @@ export default function Navbar() {
             <Link className='nav-link' to='/players'>
               Players
             </Link>
-            <Link className='nav-link' to='/parties/players'>
+            {/* <Link className='nav-link' to='/parties/players'>
               Player Parties
-            </Link>
+            </Link> */}
             <Link className='nav-link' to='/create/enemies'>
               Add Enemy
             </Link>
             <Link className='nav-link' to='/enemies'>
               Enemies
             </Link>
-            <Link className='nav-link' to='/parties/enemies'>
+            {/* <Link className='nav-link' to='/parties/enemies'>
               Enemy Parties
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ const getParties = async ({ filter = null, value = null } = {}, partyType) => {
       }
     }
   }
-  const parties = await Party.find(query).populate('characters').sort({ name: 'asc' });
+  const parties = await Party.find(query).populate('characters', 'name').sort({ name: 'asc' });
   return parties;
 };
 

@@ -8,21 +8,23 @@ export default function useAxiosFunction() {
 
   const axiosFetch = async configObj => {
     const { axiosInstance, method, url, requestConfig = {} } = configObj;
+
     try {
       setLoading(true);
       setResponse(null);
       setError(null);
       const ctrl = new AbortController();
       setController(ctrl);
+
       const res = await axiosInstance({
         url,
         method: method.toLowerCase(),
         ...requestConfig,
         signal: ctrl.signal,
       });
+
       setResponse(res.data.data);
     } catch (error) {
-      setError(error);
       if (error.name !== 'CanceledError') {
         setError(error.response.data.error);
       }

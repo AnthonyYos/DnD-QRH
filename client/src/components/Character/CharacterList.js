@@ -57,7 +57,7 @@ export const CharacterList = ({ characterType }) => {
     <React.Fragment>
       {/* Search fields */}
       <section className='row mt-3'>
-        <div className='offset-4'>
+        <div className='offset-5 col-sm-4'>
           <SearchBar
             selectOptions={characterSearchFilters}
             selectFilterHandler={handleSearchFilter}

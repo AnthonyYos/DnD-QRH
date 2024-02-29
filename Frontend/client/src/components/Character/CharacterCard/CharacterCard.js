@@ -12,7 +12,7 @@ export default function CharacterCard({ character, characterListState }) {
   const {
     name: characterName,
     health: characterHealth,
-    amorClass: characterArmorClass,
+    armorClass: characterArmorClass,
     speed: characterSpeed,
     alignment: characterAlignment,
     meta: characterMeta,

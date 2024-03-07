@@ -1,5 +1,7 @@
 node_modules
 Backend/Config/config.env
+Backend/db/seed_data.json
+Backend/db/seed_database.js
 docker-compose.yaml
 .dockerignore
 Dockerfile

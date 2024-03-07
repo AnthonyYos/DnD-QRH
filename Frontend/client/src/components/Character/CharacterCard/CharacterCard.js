@@ -14,8 +14,14 @@ export default function CharacterCard({ character, characterListState }) {
     health: characterHealth,
     armorClass: characterArmorClass,
     speed: characterSpeed,
-    alignment: characterAlignment,
     meta: characterMeta,
+    saving_throws: characterSavingThrows,
+    skills: characterSkills,
+    senses: characterSenses,
+    languages: characterLanguages,
+    traits: characterTraits,
+    actions: characterActions,
+    legendaryActions: characterLegendaryActions,
     ...stats
   } = character;
 
@@ -43,7 +49,7 @@ export default function CharacterCard({ character, characterListState }) {
       : `/enemies/${character._id}`;
 
   return (
-    <div className='col-sm-4 mb-4'>
+    <div className='col-md-4 mb-4'>
       <div className='card'>
         <div className='card-body'>
           <section className='row card-text'>
@@ -52,8 +58,11 @@ export default function CharacterCard({ character, characterListState }) {
               health={characterHealth}
               armorClass={characterArmorClass}
               speed={characterSpeed}
-              alignment={characterAlignment}
               meta={characterMeta}
+              saving_throws={characterSavingThrows}
+              skills={characterSkills}
+              senses={characterSenses}
+              languages={characterLanguages}
             />
           </section>
           <section className='row mb-2'>

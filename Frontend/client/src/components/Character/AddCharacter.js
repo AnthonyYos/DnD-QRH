@@ -2,9 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Form from '../Form/Form';
 import Input from '../Form/Input';
-import Select from '../Form/Select';
 import Button from '../UI/Button';
-import { alignmentOptions } from '../../util/alignmentOptions';
 import StatInput from '../Form/StatInput';
 import CharacterType from '../../util/CharacterType';
 import useAxiosFunction from '../../hooks/useAxiosFunction';
@@ -26,20 +24,14 @@ export default function AddCharacter({ characterType }) {
 
   const btnLabel = characterType === CharacterType.PLAYER ? 'Add Player' : 'Add Enemy';
 
-  const onSubmit = data => {
-    // const { str, dex, con, int, wis, cha, ...partialData } = data;
-    // const { str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod, ...rest } = partialData;
-
-    const newCharacter = {
+  const onSubmit = formData => {
+    const newCharacterData = {
       type: characterType,
-      ...data,
-      // ...rest,
-      // stats: { str, dex, con, int, wis, cha },
-      // modifiers: { str_mod, dex_mod, con_mod, int_mod, wis_mod, cha_mod },
+      ...formData,
     };
-
+    console.log(newCharacterData);
     try {
-      addCharacter(newCharacter);
+      addCharacter(newCharacterData);
       if (error) throw error;
       switch (characterType) {
         case CharacterType.PLAYER:
@@ -59,21 +51,18 @@ export default function AddCharacter({ characterType }) {
       <section className='row'>
         <div className='col-sm-4 offset-sm-4 card'>
           <Form onSubmit={onSubmit}>
-            <Input name='name' label='Name' className='col-4 offset-4' />
-            <Input
-              name='meta'
-              label='Meta'
-              placeholder='Add info - species, size, shape, etc...'
-              className='col-4 m-3'
-            />
-            <Input name='armorClass' label='Armor Class' type='number' min={1} max={500} />
-            <Input name='health' label='Health' type='number' min={1} max={500} />
+            <Input name='name' label='Name' />
+            <Input name='meta' label='Meta' placeholder='Add info - species, size, shape, etc...' />
+            <Input name='armorClass' label='Armor Class' />
+            <Input name='health' label='Health' />
             <Input name='speed' label='Speed' />
-            <Select
-              name='alignment'
-              label='Alignment'
-              className='form-group col-5 offset-4'
-              options={alignmentOptions}
+            <Input name='skills' label='Skills' />
+            <Input name='senses' label='Senses' />
+            <Input name='languages' label='Languages' />
+            <Input
+              name='saving_throws'
+              label='Saving Throws'
+              placeholder='con +6, int +8, wis +6...'
             />
             <StatInput
               name='str'

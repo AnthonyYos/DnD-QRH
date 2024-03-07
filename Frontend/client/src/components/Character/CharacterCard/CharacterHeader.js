@@ -1,6 +1,16 @@
 import React from 'react';
 
-export default function CharacterHeader({ name, health, armorClass, alignment, meta, speed }) {
+export default function CharacterHeader({
+  name,
+  health,
+  armorClass,
+  meta,
+  speed,
+  saving_throws,
+  skills,
+  senses,
+  languages,
+}) {
   return (
     <React.Fragment>
       <h5 className='card-title text-center'>{name}</h5>
@@ -13,8 +23,8 @@ export default function CharacterHeader({ name, health, armorClass, alignment, m
           {armorClass}
         </div>
         <div className='col-md-6'>
-          <strong>Alignment: </strong>
-          {alignment}
+          <strong>Meta: </strong>
+          {meta}
           <br />
           <strong>Speed: </strong>
           {speed}
@@ -22,11 +32,19 @@ export default function CharacterHeader({ name, health, armorClass, alignment, m
       </div>
       <div className='row mb-2'>
         <div className='col'>
-          <strong>Meta: </strong>
-          {meta}
+          <strong>Saving Throws: </strong>
+          {saving_throws}
+          <br />
+          <strong>Skills: </strong>
+          {skills}
+          <br />
+          <strong>Senses: </strong>
+          {senses}
+          <br />
+          <strong>Languages: </strong>
+          {languages}
         </div>
       </div>
-
       <hr />
     </React.Fragment>
   );

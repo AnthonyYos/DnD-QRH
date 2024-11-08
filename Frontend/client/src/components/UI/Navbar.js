@@ -20,24 +20,9 @@ export default function Navbar() {
         </button>
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
           <div className='navbar-nav ms-auto'>
-            <Link className='nav-link' to='/create/players'>
-              Add Player
+            <Link className='nav-link' to='/create/characters'>
+              Add Character
             </Link>
-            <Link className='nav-link' to='/players'>
-              Players
-            </Link>
-            {/* <Link className='nav-link' to='/parties/players'>
-              Player Parties
-            </Link> */}
-            <Link className='nav-link' to='/create/enemies'>
-              Add Enemy
-            </Link>
-            <Link className='nav-link' to='/enemies'>
-              Enemies
-            </Link>
-            {/* <Link className='nav-link' to='/parties/enemies'>
-              Enemy Parties
-            </Link> */}
           </div>
         </div>
       </div>

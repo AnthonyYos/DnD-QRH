@@ -1,15 +1,15 @@
 const noCharacterError = { status: 404, message: 'Character not found.' };
-const characterTypeError = { status: 404, message: 'Type of character was not specified.' };
+const characterTypeError = { status: 200, message: 'Type of character was not specified.' };
 const characterDAO = require('../service/characterDAO');
 
 //@desc Get all characters of a type
 //@route GET /api/v1/'resource type'
 //@access Public
 const getCharacters = async (req, res, next) => {
-  const { filter, query, characterType } = req.query || {};
-  if (!characterType) throw characterTypeError;
-  const characters = await characterDAO.getCharacters({ filter, value: query }, characterType);
-  return res.status(200).json({ data: characters });
+  const { filter, query } = req.query || {};
+  // if (!characterType) throw characterTypeError;
+  const characters = await characterDAO.getCharacters({ filter, value: query });
+  return res.status(200).json({ characterData: characters });
 };
 
 //@desc Get character by id
@@ -18,7 +18,7 @@ const getCharacters = async (req, res, next) => {
 const findCharacter = async (req, res, next) => {
   const character = await characterDAO.findCharacter(req.params.id);
   if (!character) throw noCharacterError;
-  return res.status(200).json({ data: character });
+  return res.status(200).json({ characterData: character });
 };
 
 //@desc Post character
@@ -27,7 +27,7 @@ const findCharacter = async (req, res, next) => {
 const addCharacter = async (req, res, next) => {
   const newCharacter = await characterDAO.createCharacter(req.body);
   if (newCharacter.status) throw newCharacter;
-  res.status(200).json({ data: newCharacter });
+  res.status(200).json({ characterData: newCharacter });
 };
 
 //@desc Put find/update character by id
@@ -36,7 +36,7 @@ const addCharacter = async (req, res, next) => {
 const updateCharacter = async (req, res, next) => {
   const character = await characterDAO.updateCharacter(req.params.id, req.body);
   if (!character) throw noCharacterError;
-  return res.status(200).json({ data: character });
+  return res.status(200).json({ characterData: character });
 };
 
 //@desc Delete find/delete character by id
@@ -45,7 +45,7 @@ const updateCharacter = async (req, res, next) => {
 const deleteCharacter = async (req, res, next) => {
   const character = await characterDAO.deleteCharacter(req.params.id);
   if (!character) throw noCharacterError;
-  return res.status(200).json({ data: {} });
+  return res.status(200).json({ characterData: {}, status: 'Delete successful' });
 };
 
 module.exports = {

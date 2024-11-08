@@ -23,7 +23,11 @@ export default function useAxiosFunction() {
         signal: ctrl.signal,
       });
 
-      setResponse(res.data.data);
+      setResponse(res.data.characterData);
+      console.log(`THIS IS res.data`);
+      console.log(res.data);
+      console.log(`THIS IS res.data.characterData`);
+      console.log(res.data.characterData);
     } catch (error) {
       if (error.name !== 'CanceledError') {
         setError(error.response.data.error);

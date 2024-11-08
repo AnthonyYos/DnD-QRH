@@ -4,7 +4,7 @@ import Form from '../Form/Form';
 import Input from '../Form/Input';
 import Button from '../UI/Button';
 import StatInput from '../Form/StatInput';
-import CharacterType from '../../util/CharacterType';
+// import CharacterType from '../../util/CharacterType';
 import useAxiosFunction from '../../hooks/useAxiosFunction';
 import axios from '../../util/apis/characters';
 
@@ -22,25 +22,26 @@ export default function AddCharacter({ characterType }) {
       },
     });
 
-  const btnLabel = characterType === CharacterType.PLAYER ? 'Add Player' : 'Add Enemy';
+  const btnLabel = 'Add Character';
 
   const onSubmit = formData => {
     const newCharacterData = {
-      type: characterType,
+      // type: characterType,
       ...formData,
     };
     console.log(newCharacterData);
     try {
       addCharacter(newCharacterData);
       if (error) throw error;
-      switch (characterType) {
-        case CharacterType.PLAYER:
-          return navigate('/players');
-        case CharacterType.ENEMY:
-          return navigate('/enemies');
-        default:
-          return navigate('/');
-      }
+      // switch (characterType) {
+      //   case CharacterType.PLAYER:
+      //     return navigate('/players');
+      //   case CharacterType.ENEMY:
+      //     return navigate('/enemies');
+      //   default:
+      //     return navigate('/');
+      // }
+      return navigate('/characters');
     } catch (error) {
       console.log(error);
     }

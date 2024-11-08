@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import CharacterCard from './CharacterCard/CharacterCard';
-import CharacterType from '../../util/CharacterType';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import { characterSearchFilters } from '../../util/searchFilters/characterSearchFilters';
@@ -8,8 +7,8 @@ import characterApiAxios from '../../util/apis/characters';
 import useAxiosFunction from '../../hooks/useAxiosFunction';
 import SearchBar from '../Search/SearchBar';
 
-export const CharacterList = ({ characterType }) => {
-  const urlQuery = `?characterType=${characterType}`;
+export const CharacterList = () => {
+  const urlQuery = '';
   const [url, setUrl] = useState(urlQuery);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchFilter, setSearchFilter] = useState('name');
@@ -33,11 +32,11 @@ export const CharacterList = ({ characterType }) => {
   }, [url]);
 
   // Resets search field when switching between CharacterList for players & enemies
-  useEffect(() => setSearchTerm(''), [characterType]);
+  useEffect(() => setSearchTerm(''), []);
 
   // Sets the query url whenever searchTerm/searchFilter changes
   useEffect(() => {
-    if (searchTerm) setUrl(urlQuery + `&filter=${searchFilter}&query=${searchTerm}`);
+    if (searchTerm) setUrl(urlQuery + `?filter=${searchFilter}&query=${searchTerm}`);
     else setUrl(urlQuery);
   }, [searchTerm, searchFilter, urlQuery]);
 
@@ -49,9 +48,9 @@ export const CharacterList = ({ characterType }) => {
     setSearchFilter(e.target.value.toLowerCase());
   };
 
-  const addCharacterLabel = characterType === CharacterType.PLAYER ? 'Add Player' : 'Add Enemy';
-  const noCharacterLabel = characterType === CharacterType.PLAYER ? 'Player(s)' : 'Enemy / Enemies';
-  const addBtnLink = characterType === CharacterType.PLAYER ? `/create/players` : `/create/enemies`;
+  const addCharacterLabel = 'Add Character';
+  const noCharacterLabel = 'Characters';
+  const addBtnLink = `/create/characters`;
 
   return (
     <React.Fragment>

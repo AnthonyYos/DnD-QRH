@@ -34,7 +34,7 @@ export default function UpdateCharacter({ characterType }) {
     getData();
   }, []);
 
-  const btnLabel = characterType === CharacterType.PLAYER ? 'Update Player' : 'Update Enemy';
+  const btnLabel = 'Update Character';
 
   const onSubmit = formdata => {
     const updateData = { ...formdata };
@@ -49,17 +49,11 @@ export default function UpdateCharacter({ characterType }) {
       });
       setUpdated(true);
       setCharacter(updateData);
-      switch (characterType) {
-        case CharacterType.PLAYER:
-          return navigate(`/players/${id}`);
-        case CharacterType.ENEMY:
-          return navigate(`/enemies/${id}`);
-        default:
-          setUpdated(false);
-          return navigate(`${ApiUrl.CHARACTER}/${id}`);
-      }
+      return navigate(`/characters/${id}`);
     } catch (error) {
-      console.log(error, 'errrororor');
+      console.log(error, 'failed to update');
+      setUpdated(false);
+      return navigate(`characters/${id}`);
     }
   };
 

@@ -43,10 +43,7 @@ export default function CharacterCard({ character, characterListState }) {
     }
   };
 
-  const updateLink =
-    character.type === CharacterType.PLAYER
-      ? `/players/${character._id}`
-      : `/enemies/${character._id}`;
+  const updateLink = `/characters/${character._id}`;
 
   return (
     <div className='col-md-4 mb-4'>

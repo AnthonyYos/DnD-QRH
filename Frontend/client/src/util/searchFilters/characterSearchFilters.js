@@ -1,1 +1,1 @@
-export const characterSearchFilters = ['Name', 'Meta', 'Alignment'];
+export const characterSearchFilters = ['Name', 'Meta'];

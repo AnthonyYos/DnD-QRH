@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className='navbar sticky-top navbar-expand-lg navbar-dark bg-dark mb-3'>
       <div className='container-fluid'>
         <Link className='navbar-brand' to='/'>
-          Home
+          DnD-QRH
         </Link>
         <button
           className='navbar-toggler'
@@ -20,6 +20,9 @@ export default function Navbar() {
         </button>
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
           <div className='navbar-nav ms-auto'>
+            <Link className='nav-link' to='/'>
+              View Characters
+            </Link>
             <Link className='nav-link' to='/create/characters'>
               Add Character
             </Link>

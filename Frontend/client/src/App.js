@@ -12,7 +12,6 @@ const App = () => {
       <Routes>
         <Route index element={<CharacterList />} />
         <Route path='/create/characters' element={<AddCharacter />} />
-        <Route path='/characters' element={<CharacterList />} />
         <Route path='/characters/:id' element={<UpdateCharacter />} />
       </Routes>
     </BrowserRouter>

@@ -66,14 +66,14 @@ export default function CharacterCard({ character, characterListState }) {
             <CharacterStats stats={stats} className='col-md-6 col-6' />
           </section>
           <section className='row mx-2'>
-            <Link className='btn btn-info col-lg-3 offset-lg-2 col-5' to={updateLink}>
+            <Link className='btn btn-info col-lg-4 offset-lg-4 col-4 offset-4' to={updateLink}>
               Update
             </Link>
-            <Button
+            {/* <Button
               className='btn btn-danger col-lg-3 offset-lg-2 col-5 offset-2'
               onClick={deleteHandler}>
               Delete
-            </Button>
+            </Button> */}
           </section>
         </div>
       </div>

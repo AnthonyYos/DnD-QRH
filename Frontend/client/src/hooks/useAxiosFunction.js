@@ -24,10 +24,6 @@ export default function useAxiosFunction() {
       });
 
       setResponse(res.data.characterData);
-      console.log(`THIS IS res.data`);
-      console.log(res.data);
-      console.log(`THIS IS res.data.characterData`);
-      console.log(res.data.characterData);
     } catch (error) {
       if (error.name !== 'CanceledError') {
         setError(error.response.data.error);
